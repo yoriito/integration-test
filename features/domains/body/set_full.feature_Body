@@ -1,0 +1,406 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: Signal API set
+
+    @coldstart @serial
+    Scenario Outline: Cold start once and seed initial actuator values
+        Given Kura service is cleanly restarted
+        When HeadlessApp sets the following actuator signals
+        | path                                                     | datatype | value         |
+        | Vehicle.Body.Hood.IsLocked | bool | false |
+        | Vehicle.Body.Hood.IsOpen | bool | false |
+        | Vehicle.Body.Hood.Position | uint8 | 50 |
+        | Vehicle.Body.Horn.IsActive | bool | false |
+        | Vehicle.Body.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Body.Lights.Backup.IsOn | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsOn | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | bool | false |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | bool | false |
+        | Vehicle.Body.Lights.Parking.IsOn | bool | false |
+        | Vehicle.Body.Lights.Running.IsOn | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | int8 | 0 |
+        | Vehicle.Body.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLocked | bool | false |
+        | Vehicle.Body.Trunk.Front.IsOpen | bool | false |
+        | Vehicle.Body.Trunk.Front.Position | uint8 | 50 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLocked | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsOpen | bool | false |
+        | Vehicle.Body.Trunk.Rear.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | string | SLOW |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | string | WIPE |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | string | SLOW |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | string | WIPE |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | uint8 | 50 |
+        
+        Then PAL should report the following actuator signals
+        | path                                                     | datatype | value         |
+        | Vehicle.Body.Hood.IsLocked | bool | false |
+        | Vehicle.Body.Hood.IsOpen | bool | false |
+        | Vehicle.Body.Hood.Position | uint8 | 50 |
+        | Vehicle.Body.Horn.IsActive | bool | false |
+        | Vehicle.Body.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Body.Lights.Backup.IsOn | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsOn | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | bool | false |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | bool | false |
+        | Vehicle.Body.Lights.Parking.IsOn | bool | false |
+        | Vehicle.Body.Lights.Running.IsOn | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | int8 | 0 |
+        | Vehicle.Body.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLocked | bool | false |
+        | Vehicle.Body.Trunk.Front.IsOpen | bool | false |
+        | Vehicle.Body.Trunk.Front.Position | uint8 | 50 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLocked | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsOpen | bool | false |
+        | Vehicle.Body.Trunk.Rear.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | string | SLOW |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | string | WIPE |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | string | SLOW |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | string | WIPE |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | uint8 | 50 |
+        
+    @warm @serial
+    Scenario Outline: Overwrite/confirm after cold start (no restart)
+        Given Set the actuator signal <path> to <datatype> <default_value>
+        When HeadlessApp set the actuator signal <path> to <datatype> <checked_value>
+        Then the result obtained from the actuator signal by PAL should be <datatype> <checked_value> on <path>
+
+    Examples:
+        | path                                                     | datatype | default_value | checked_value |
+        | Vehicle.Body.Hood.IsLocked | bool | false | true |
+        | Vehicle.Body.Hood.IsOpen | bool | false | true |
+        | Vehicle.Body.Hood.Position | uint8 | 50 | 100 |
+        | Vehicle.Body.Horn.IsActive | bool | false | true |
+        | Vehicle.Body.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.Body.Lights.Backup.IsOn | bool | false | true |
+        | Vehicle.Body.Lights.Beam.High.IsOn | bool | false | true |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | bool | false | true |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | bool | false | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | bool | false | true |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | bool | false | true |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | bool | false | true |
+        | Vehicle.Body.Lights.Parking.IsOn | bool | false | true |
+        | Vehicle.Body.Lights.Running.IsOn | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | int8 | 0 | 100 |
+        | Vehicle.Body.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 | 100 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | bool | false | true |
+        | Vehicle.Body.Trunk.Front.IsLocked | bool | false | true |
+        | Vehicle.Body.Trunk.Front.IsOpen | bool | false | true |
+        | Vehicle.Body.Trunk.Front.Position | uint8 | 50 | 100 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.IsLocked | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.IsOpen | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.Position | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | string | SLOW | OFF |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | string | WIPE | STOP_HOLD |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | string | SLOW | OFF |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | string | WIPE | STOP_HOLD |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | uint8 | 50 | 100 |
+        
+    Scenario Outline: Millions of set requests do not kill kura server & values remain consistent
+        When HeadlessApp set the signal <path> to <datatype> <checked_value> <count> times with duplex <duplex>
+        Then the result obtained from the actuator signal by PAL should be <datatype> <checked_value> on <path>
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | default_value | checked_value |
+        | Vehicle.Body.Hood.IsLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Hood.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Hood.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Horn.IsActive | 20 | 10 | bool | false | true |
+        | Vehicle.Body.IsAutoPowerOptimize | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Backup.IsOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Beam.High.IsOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Brake.IsActive | 20 | 10 | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Parking.IsOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Running.IsOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Body.PowerOptimizeLevel | 20 | 10 | uint8 | 5 | 10 |
+        | Vehicle.Body.RearMainSpoilerPosition | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Front.IsLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Front.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Front.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.IsLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | 20 | 10 | string | SLOW | OFF |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | 20 | 10 | string | WIPE | STOP_HOLD |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | 20 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | 20 | 10 | string | SLOW | OFF |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | 20 | 10 | string | WIPE | STOP_HOLD |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | 20 | 10 | uint8 | 50 | 100 |
+        
+    @CleanupRestoreServerforSet
+    Scenario Outline: Set requests are failed when the server is stopped
+        When the server is stopped for set
+        Then an attempt to set the actuator signal <path> to <datatype> <checked_value> is failed
+
+    Examples:
+        | path                                                     | datatype      | checked_value       |
+        | Vehicle.Body.Hood.IsLocked | bool | true |
+        | Vehicle.Body.Hood.IsOpen | bool | true |
+        | Vehicle.Body.Hood.Position | uint8 | 100 |
+        | Vehicle.Body.Horn.IsActive | bool | true |
+        | Vehicle.Body.IsAutoPowerOptimize | bool | true |
+        | Vehicle.Body.Lights.Backup.IsOn | bool | true |
+        | Vehicle.Body.Lights.Beam.High.IsOn | bool | true |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | bool | true |
+        | Vehicle.Body.Lights.Brake.IsActive | string | INACTIVE |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | bool | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | bool | true |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | bool | true |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | bool | true |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | bool | true |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | bool | true |
+        | Vehicle.Body.Lights.Parking.IsOn | bool | true |
+        | Vehicle.Body.Lights.Running.IsOn | bool | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | bool | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | bool | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | bool | true |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 100 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | int8 | 100 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | bool | true |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | bool | true |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | bool | true |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | int8 | 100 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | int8 | 100 |
+        | Vehicle.Body.PowerOptimizeLevel | uint8 | 10 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 100 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | bool | true |
+        | Vehicle.Body.Trunk.Front.IsLocked | bool | true |
+        | Vehicle.Body.Trunk.Front.IsOpen | bool | true |
+        | Vehicle.Body.Trunk.Front.Position | uint8 | 100 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | bool | true |
+        | Vehicle.Body.Trunk.Rear.IsLocked | bool | true |
+        | Vehicle.Body.Trunk.Rear.IsOpen | bool | true |
+        | Vehicle.Body.Trunk.Rear.Position | uint8 | 100 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | bool | true |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | uint8 | 255 |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | string | OFF |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | uint8 | 255 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | string | STOP_HOLD |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | uint8 | 100 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | bool | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | uint8 | 255 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | string | OFF |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | uint8 | 255 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | string | STOP_HOLD |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | uint8 | 100 |
+        
+
+    @CleanupRestoreNetworkforSet
+    Scenario Outline: Set requests are failed when the network communication failure
+        When network failure of <network_failure> is injected for set
+        Then an attempt to set the actuator signal <path> to <datatype> <checked_value> is failed
+
+    Examples:
+        | path                                                     | datatype      | checked_value       | network_failure       |
+        | Vehicle.Body.Hood.IsLocked | bool | true | timeout |
+        | Vehicle.Body.Hood.IsLocked | bool | true | reject |
+        | Vehicle.Body.Hood.IsOpen | bool | true | timeout |
+        | Vehicle.Body.Hood.IsOpen | bool | true | reject |
+        | Vehicle.Body.Hood.Position | uint8 | 100 | timeout |
+        | Vehicle.Body.Hood.Position | uint8 | 100 | reject |
+        | Vehicle.Body.Horn.IsActive | bool | true | timeout |
+        | Vehicle.Body.Horn.IsActive | bool | true | reject |
+        | Vehicle.Body.IsAutoPowerOptimize | bool | true | timeout |
+        | Vehicle.Body.IsAutoPowerOptimize | bool | true | reject |
+        | Vehicle.Body.Lights.Backup.IsOn | bool | true | timeout |
+        | Vehicle.Body.Lights.Backup.IsOn | bool | true | reject |
+        | Vehicle.Body.Lights.Beam.High.IsOn | bool | true | timeout |
+        | Vehicle.Body.Lights.Beam.High.IsOn | bool | true | reject |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | bool | true | timeout |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | bool | true | reject |
+        | Vehicle.Body.Lights.Brake.IsActive | string | INACTIVE | timeout |
+        | Vehicle.Body.Lights.Brake.IsActive | string | INACTIVE | reject |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | bool | true | timeout |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | bool | true | reject |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | bool | true | timeout |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | bool | true | reject |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | bool | true | timeout |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | bool | true | reject |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | bool | true | timeout |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | bool | true | reject |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | bool | true | timeout |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | bool | true | reject |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | bool | true | timeout |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | bool | true | reject |
+        | Vehicle.Body.Lights.Parking.IsOn | bool | true | timeout |
+        | Vehicle.Body.Lights.Parking.IsOn | bool | true | reject |
+        | Vehicle.Body.Lights.Running.IsOn | bool | true | timeout |
+        | Vehicle.Body.Lights.Running.IsOn | bool | true | reject |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | bool | true | timeout |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | bool | true | reject |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | bool | true | timeout |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | bool | true | reject |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | bool | true | timeout |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | bool | true | reject |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 100 | timeout |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 100 | reject |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | int8 | 100 | timeout |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | int8 | 100 | reject |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | bool | true | timeout |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | bool | true | reject |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | bool | true | timeout |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | bool | true | reject |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | bool | true | timeout |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | bool | true | reject |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | int8 | 100 | timeout |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | int8 | 100 | reject |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | int8 | 100 | timeout |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | int8 | 100 | reject |
+        | Vehicle.Body.PowerOptimizeLevel | uint8 | 10 | timeout |
+        | Vehicle.Body.PowerOptimizeLevel | uint8 | 10 | reject |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 100 | timeout |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 100 | reject |
+        | Vehicle.Body.Trunk.Front.IsLightOn | bool | true | timeout |
+        | Vehicle.Body.Trunk.Front.IsLightOn | bool | true | reject |
+        | Vehicle.Body.Trunk.Front.IsLocked | bool | true | timeout |
+        | Vehicle.Body.Trunk.Front.IsLocked | bool | true | reject |
+        | Vehicle.Body.Trunk.Front.IsOpen | bool | true | timeout |
+        | Vehicle.Body.Trunk.Front.IsOpen | bool | true | reject |
+        | Vehicle.Body.Trunk.Front.Position | uint8 | 100 | timeout |
+        | Vehicle.Body.Trunk.Front.Position | uint8 | 100 | reject |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | bool | true | timeout |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | bool | true | reject |
+        | Vehicle.Body.Trunk.Rear.IsLocked | bool | true | timeout |
+        | Vehicle.Body.Trunk.Rear.IsLocked | bool | true | reject |
+        | Vehicle.Body.Trunk.Rear.IsOpen | bool | true | timeout |
+        | Vehicle.Body.Trunk.Rear.IsOpen | bool | true | reject |
+        | Vehicle.Body.Trunk.Rear.Position | uint8 | 100 | timeout |
+        | Vehicle.Body.Trunk.Rear.Position | uint8 | 100 | reject |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | bool | true | timeout |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | bool | true | reject |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | uint8 | 255 | timeout |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | uint8 | 255 | reject |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | string | OFF | timeout |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | string | OFF | reject |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | uint8 | 255 | timeout |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | uint8 | 255 | reject |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | string | STOP_HOLD | timeout |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | string | STOP_HOLD | reject |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | uint8 | 100 | timeout |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | uint8 | 100 | reject |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | bool | true | timeout |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | bool | true | reject |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | uint8 | 255 | timeout |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | uint8 | 255 | reject |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | string | OFF | timeout |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | string | OFF | reject |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | uint8 | 255 | timeout |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | uint8 | 255 | reject |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | string | STOP_HOLD | timeout |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | string | STOP_HOLD | reject |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | uint8 | 100 | timeout |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | uint8 | 100 | reject |
+        

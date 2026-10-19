@@ -1,0 +1,1308 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: Subscribe
+
+    Scenario Outline: HeadlessApp_Subscribe_Sensor_Value
+        Given PAL set sensor signal <path> to <datatype> <value>
+        Given HeadlessApp subscribe the sensor signal <path> of <datatype>
+        Then PAL set the signal at <path> of <datatype> to <values> by order, subscribe stream receive the same data
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                         | datatype  | value            | values            |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | uint16 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | uint16 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | uint16 | 32767 | ["65535","32767","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | uint16 | 32767 | ["65535","32767","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | uint16 | 32767 | ["65535","32767","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | uint16 | 32767 | ["65535","32767","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | uint16 | 32767 | ["65535","32767","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | uint16 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | uint16 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | uint16 | 32767 | ["65535","32767","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | uint16 | 32767 | ["65535","32767","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | uint16 | 32767 | ["65535","32767","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | uint16 | 32767 | ["65535","32767","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | uint16 | 32767 | ["65535","32767","0"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | uint16 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | uint16 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | int16 | -16384 | ["0","-16384","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | uint8 | 127 | ["255","127","0"] |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | uint8 | 127 | ["255","127","0"] |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | uint8 | 127 | ["255","127","0"] |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | uint8 | 127 | ["255","127","0"] |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | uint8 | 127 | ["255","127","0"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | int16 | 0 | ["32767","0","-32768"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | int16 | 0 | ["32767","0","-32768"] |
+        
+    Scenario Outline: Notification of subscribed signals
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | int16 | 0 | 32767 |
+        
+    Scenario Outline: Notification is delivered even if the signal is unavailable as sensor
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> as unavailable
+        Then the subscribe stream returns <datatype> <value_1> on <path> as unavailable as sensor
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | int16 | 0 | 32767 |
+        
+    Scenario Outline: Notification carries IsAvailableActuator as true when reported by the producer
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> as available actuator
+        Then the subscription stream returns available actuator on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | int16 | 0 | 32767 |
+        
+    Scenario Outline: Notification carries a produced timestamp when the producer attaches one
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> with a produced timestamp
+        Then the subscribe stream returns a produced timestamp on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | int16 | 0 | 32767 |
+        
+    Scenario Outline: Multiple subscriptions to a signal
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count         | duplex        | datatype      | value_0       | value_1       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | 2 | 1 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | 2 | 1 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | 2 | 1 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | 2 | 1 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | 2 | 1 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | 2 | 1 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | 2 | 1 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | 2 | 1 | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | 2 | 1 | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | 2 | 1 | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | 2 | 1 | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | 2 | 1 | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | 2 | 1 | int16 | 0 | 32767 |
+        
+    Scenario Outline: Notification issued even if signal value being changed
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>, which is equal to the current value
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | int16 | 0 | 32767 |
+        
+    Scenario Outline: Millions of subscribe requests do not kill kura server & subscription_ids are correctly returned
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | value_0       | value_1       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | 100 | 10 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | 100 | 10 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | 100 | 10 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | 100 | 10 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | 100 | 10 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | 100 | 10 | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | 100 | 10 | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | 100 | 10 | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | 100 | 10 | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | 100 | 10 | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | 100 | 10 | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | 100 | 10 | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | 100 | 10 | int16 | 0 | 32767 |
+        
+    @CleanupRestoreServer
+    Scenario Outline: Subscribe requests are failed when the server is stopped
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When the server is stopped
+        Then an attempt to subscribe the signal at <path> of datatype <datatype> is failed
+
+    Examples:
+        | path                                                     | datatype      | value_0       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | int16 | -16384 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | uint8 | 127 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | uint8 | 127 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | uint8 | 127 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | uint8 | 127 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | uint8 | 127 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | int16 | 0 |
+        
+    @CleanupRestoreNetwork
+    Scenario Outline: Subscribe requests are failed when the network communication failure
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        Then an attempt to subscribe the signal at <path> of datatype <datatype> is failed
+
+    Examples:
+        | path                                                     | datatype      | value_0       | network_failure       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | uint16 | 50 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | uint16 | 50 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | uint16 | 50 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | uint16 | 50 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | uint16 | 32767 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | uint16 | 32767 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | uint16 | 32767 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | uint16 | 32767 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | uint16 | 32767 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | uint16 | 32767 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | uint16 | 32767 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | uint16 | 32767 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | uint16 | 32767 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | uint16 | 32767 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | uint16 | 50 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | uint16 | 50 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | uint16 | 50 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | uint16 | 50 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | uint16 | 32767 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | uint16 | 32767 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | uint16 | 32767 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | uint16 | 32767 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | uint16 | 32767 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | uint16 | 32767 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | uint16 | 32767 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | uint16 | 32767 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | uint16 | 32767 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | uint16 | 32767 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | uint16 | 50 | timeout |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | uint16 | 50 | reject  |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | uint16 | 50 | timeout |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | uint16 | 50 | reject  |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | int16 | -16384 | timeout |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | int16 | -16384 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | uint8 | 127 | timeout |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | uint8 | 127 | reject  |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | uint8 | 127 | timeout |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | uint8 | 127 | reject  |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | uint8 | 127 | timeout |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | uint8 | 127 | reject  |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | uint8 | 127 | timeout |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | uint8 | 127 | reject  |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | uint8 | 127 | timeout |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | uint8 | 127 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | int16 | 0 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | uint8 | 50 | timeout |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | uint8 | 50 | reject  |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | int16 | 0 | timeout |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | int16 | 0 | reject  |
+        
+    Scenario Outline: Subscribe contexts are no longer available after the server is reset
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the server is reset
+        And the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream for the signal <path> returns no data
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | uint16 | 32767 | 65535 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | uint16 | 50 | 100 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | int16 | -16384 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | uint8 | 127 | 255 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | int16 | 0 | 32767 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | uint8 | 50 | 100 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | int16 | 0 | 32767 |
+        
+    Scenario Outline: All updates are notified to subscriptions without any drops even large burden on server or network
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the signal at <path> of numeric datatype <datatype> is updated <count> times, any updates are captured from subscribe stream
+        Then HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count            | datatype      | value_0       |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMaximum | 10 | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueDistributionFrictionRightMinimum | 10 | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueElectricMinimum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.TorqueFrictionDifferenceMaximum | 10 | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaLower | 10 | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.OmegaUpper | 10 | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.Torque | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueArbitrated | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMaximum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Left.TorqueFrictionMinimum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaLower | 10 | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.OmegaUpper | 10 | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.Torque | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueArbitrated | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMaximum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row1.Wheel.Right.TorqueFrictionMinimum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMaximum | 10 | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueDistributionFrictionRightMinimum | 10 | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueElectricMinimum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.TorqueFrictionDifferenceMaximum | 10 | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaLower | 10 | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.OmegaUpper | 10 | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.Torque | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueArbitrated | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMaximum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Left.TorqueFrictionMinimum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaLower | 10 | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.OmegaUpper | 10 | uint16 | 32767 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.Torque | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueArbitrated | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMaximum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.Axle.Row2.Wheel.Right.TorqueFrictionMinimum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMaximum | 10 | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.VehicleForceDistributionFrontMinimum | 10 | uint16 | 50 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectric | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.VehicleForceElectricMinimumArbitrated | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.Brake.VehicleForceMaximum | 10 | int16 | -16384 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeed | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMaximumLimit | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.RotationalSpeedMinimumLimit | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.Torque | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximum | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMaximumLimit | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimum | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row1.TorqueMinimumLimit | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeed | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMaximumLimit | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.RotationalSpeedMinimumLimit | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.Torque | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximum | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMaximumLimit | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimum | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.ElectricAxle.Row2.TorqueMinimumLimit | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionOffsetTargetMode | 10 | uint8 | 127 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.PositionTargetMode | 10 | uint8 | 127 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPosition | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.RackPositionOffsetTarget | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngle | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row1.SteerAngleOffsetTarget | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngle | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.Axle.Row2.SteerAngleVelocityTarget | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Angle | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.AngleTargetMode | 10 | uint8 | 127 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.Torque | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTarget | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueOffsetTargetMode | 10 | uint8 | 127 |
+        | Vehicle.MotionManagement.Steering.SteeringWheel.TorqueTargetMode | 10 | uint8 | 127 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.RollTorque | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForce | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingForceTarget | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRate | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Left.DampingRateTarget | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForce | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingForceTarget | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRate | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row1.Wheel.Right.DampingRateTarget | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.RollTorque | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForce | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingForceTarget | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRate | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Left.DampingRateTarget | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForce | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingForceTarget | 10 | int16 | 0 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRate | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.Axle.Row2.Wheel.Right.DampingRateTarget | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.DampingPrioTarget | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.RollPrioTarget | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMaximum | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueDistributionFrontMinimum | 10 | uint8 | 50 |
+        | Vehicle.MotionManagement.Suspension.RollTorqueTarget | 10 | int16 | 0 |
+        

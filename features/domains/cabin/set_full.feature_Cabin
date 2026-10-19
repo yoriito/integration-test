@@ -1,0 +1,2177 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: Signal API set
+
+    @coldstart @serial
+    Scenario Outline: Cold start once and seed initial actuator values
+        Given Kura service is cleanly restarted
+        When HeadlessApp sets the following actuator signals
+        | path                                                     | datatype | value         |
+        | Vehicle.Cabin.Convertible.IsOpen | bool | false |
+        | Vehicle.Cabin.Convertible.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsLocked | bool | false |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsLocked | bool | false |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsLocked | bool | false |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsLocked | bool | false |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.Position | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.IsAirConditioningActive | bool | false |
+        | Vehicle.Cabin.HVAC.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Cabin.HVAC.IsFrontDefrosterActive | bool | false |
+        | Vehicle.Cabin.HVAC.IsRearDefrosterActive | bool | false |
+        | Vehicle.Cabin.HVAC.IsRecirculationActive | bool | false |
+        | Vehicle.Cabin.HVAC.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Cabin.IsWindowChildLockEngaged | bool | false |
+        | Vehicle.Cabin.Light.DomeLight.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.DomeLight.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.DomeLight.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.IsGloveBoxOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Cabin.RearShade.IsOpen | bool | false |
+        | Vehicle.Cabin.RearShade.Position | uint8 | 50 |
+        | Vehicle.Cabin.RearviewMirror.DimmingLevel | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.Middle.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.Middle.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.Middle.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.Middle.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Sunroof.Shade.IsOpen | bool | false |
+        | Vehicle.Cabin.Sunroof.Shade.Position | uint8 | 50 |
+        | Vehicle.Cabin.Sunroof.Slide | uint8 | 50 |
+        | Vehicle.Cabin.Sunroof.Tilt | uint8 | 50 |
+        
+        Then PAL should report the following actuator signals
+        | path                                                     | datatype | value         |
+        | Vehicle.Cabin.Convertible.IsOpen | bool | false |
+        | Vehicle.Cabin.Convertible.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsLocked | bool | false |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsLocked | bool | false |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsLocked | bool | false |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsLocked | bool | false |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.Position | uint8 | 50 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.IsOpen | bool | false |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.Position | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.IsAirConditioningActive | bool | false |
+        | Vehicle.Cabin.HVAC.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Cabin.HVAC.IsFrontDefrosterActive | bool | false |
+        | Vehicle.Cabin.HVAC.IsRearDefrosterActive | bool | false |
+        | Vehicle.Cabin.HVAC.IsRecirculationActive | bool | false |
+        | Vehicle.Cabin.HVAC.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.AirDistribution | string | MIDDLE |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.Temperature | float | 0.0 |
+        | Vehicle.Cabin.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Cabin.IsWindowChildLockEngaged | bool | false |
+        | Vehicle.Cabin.Light.DomeLight.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.DomeLight.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.DomeLight.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.IsGloveBoxOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Color | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Intensity | uint8 | 50 |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.IsLightOn | bool | false |
+        | Vehicle.Cabin.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Cabin.RearShade.IsOpen | bool | false |
+        | Vehicle.Cabin.RearShade.Position | uint8 | 50 |
+        | Vehicle.Cabin.RearviewMirror.DimmingLevel | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.Middle.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.Middle.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.Middle.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.Middle.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Airbag.IsEnabled | bool | false |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.BottomLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarHeight | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.MidLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Recline | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.TopLumbarSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.UpperShoulderSupport | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Angle | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Height | uint8 | 127 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Height | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.Level | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.FanSpeed | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.HeatingCooling | int8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Position | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.SeatBeltHeight | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.HeatingCooling | int8 | 0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Length | uint16 | 32767 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportLeft | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportRight | float | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Tilt | float | 0.0 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Ventilator | uint8 | 50 |
+        | Vehicle.Cabin.Sunroof.Shade.IsOpen | bool | false |
+        | Vehicle.Cabin.Sunroof.Shade.Position | uint8 | 50 |
+        | Vehicle.Cabin.Sunroof.Slide | uint8 | 50 |
+        | Vehicle.Cabin.Sunroof.Tilt | uint8 | 50 |
+        
+    @warm @serial
+    Scenario Outline: Overwrite/confirm after cold start (no restart)
+        Given Set the actuator signal <path> to <datatype> <default_value>
+        When HeadlessApp set the actuator signal <path> to <datatype> <checked_value>
+        Then the result obtained from the actuator signal by PAL should be <datatype> <checked_value> on <path>
+
+    Examples:
+        | path                                                     | datatype | default_value | checked_value |
+        | Vehicle.Cabin.Convertible.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Convertible.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsLocked | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsLocked | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsLocked | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsLocked | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.IsAirConditioningActive | bool | false | true |
+        | Vehicle.Cabin.HVAC.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.Cabin.HVAC.IsFrontDefrosterActive | bool | false | true |
+        | Vehicle.Cabin.HVAC.IsRearDefrosterActive | bool | false | true |
+        | Vehicle.Cabin.HVAC.IsRecirculationActive | bool | false | true |
+        | Vehicle.Cabin.HVAC.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.AirDistribution | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.Temperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.AirDistribution | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.Temperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.AirDistribution | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.Temperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.AirDistribution | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.Temperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.AirDistribution | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.Temperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.AirDistribution | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.Temperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.AirDistribution | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.Temperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.AirDistribution | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.Temperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.Cabin.IsWindowChildLockEngaged | bool | false | true |
+        | Vehicle.Cabin.Light.DomeLight.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.DomeLight.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.DomeLight.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.IsGloveBoxOn | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Color | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Intensity | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.IsLightOn | bool | false | true |
+        | Vehicle.Cabin.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.Cabin.RearShade.IsOpen | bool | false | true |
+        | Vehicle.Cabin.RearShade.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.RearviewMirror.DimmingLevel | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Airbag.IsEnabled | bool | false | true |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.BottomLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarHeight | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.MidLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Recline | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.TopLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.UpperShoulderSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Angle | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Height | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Height | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.Level | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.HeatingCooling | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Position | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.SeatBeltHeight | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Length | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Tilt | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Airbag.IsEnabled | bool | false | true |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.BottomLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarHeight | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.MidLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Recline | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.TopLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.UpperShoulderSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Angle | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Height | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.Middle.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Height | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.Level | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.TypeActive | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.HeatingCooling | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Position | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.SeatBeltHeight | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Length | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Tilt | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Airbag.IsEnabled | bool | false | true |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.BottomLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarHeight | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.MidLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Recline | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.TopLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.UpperShoulderSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Angle | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Height | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Height | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.Level | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.HeatingCooling | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Position | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.SeatBeltHeight | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Length | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Tilt | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Airbag.IsEnabled | bool | false | true |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.BottomLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarHeight | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.MidLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Recline | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.TopLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.UpperShoulderSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Angle | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Height | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Height | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.Level | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.HeatingCooling | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Position | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.SeatBeltHeight | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Length | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Tilt | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Airbag.IsEnabled | bool | false | true |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.BottomLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarHeight | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.MidLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Recline | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.TopLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.UpperShoulderSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Angle | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Height | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.Middle.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Height | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.Level | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.TypeActive | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.HeatingCooling | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Position | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.SeatBeltHeight | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Length | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Tilt | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Airbag.IsEnabled | bool | false | true |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.BottomLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarHeight | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.MidLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Recline | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.TopLumbarSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.UpperShoulderSupport | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Angle | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Height | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Height | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.Level | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.TypeActive | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.FanSpeed | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.HeatingCooling | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Position | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.SeatBeltHeight | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.HeatingCooling | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Length | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportLeft | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportRight | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Tilt | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Ventilator | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Sunroof.Shade.IsOpen | bool | false | true |
+        | Vehicle.Cabin.Sunroof.Shade.Position | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Sunroof.Slide | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Sunroof.Tilt | uint8 | 50 | 100 |
+        
+    Scenario Outline: Millions of set requests do not kill kura server & values remain consistent
+        When HeadlessApp set the signal <path> to <datatype> <checked_value> <count> times with duplex <duplex>
+        Then the result obtained from the actuator signal by PAL should be <datatype> <checked_value> on <path>
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | default_value | checked_value |
+        | Vehicle.Cabin.Convertible.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Convertible.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.IsAirConditioningActive | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.HVAC.IsAutoPowerOptimize | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.HVAC.IsFrontDefrosterActive | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.HVAC.IsRearDefrosterActive | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.HVAC.IsRecirculationActive | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.HVAC.PowerOptimizeLevel | 20 | 10 | uint8 | 5 | 10 |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.AirDistribution | 20 | 10 | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.Temperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.AirDistribution | 20 | 10 | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.Temperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.AirDistribution | 20 | 10 | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.Temperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.AirDistribution | 20 | 10 | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.Temperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.AirDistribution | 20 | 10 | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.Temperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.AirDistribution | 20 | 10 | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.Temperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.AirDistribution | 20 | 10 | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.Temperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.AirDistribution | 20 | 10 | string | MIDDLE | UP |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.Temperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.IsAutoPowerOptimize | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.IsWindowChildLockEngaged | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.DomeLight.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.DomeLight.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.DomeLight.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.IsGloveBoxOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Color | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Intensity | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.IsLightOn | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.PowerOptimizeLevel | 20 | 10 | uint8 | 5 | 10 |
+        | Vehicle.Cabin.RearShade.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.RearShade.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.RearviewMirror.DimmingLevel | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Airbag.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.BottomLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarHeight | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.MidLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Recline | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.TopLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.UpperShoulderSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Angle | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Height | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Height | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.Level | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.TypeActive | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.HeatingCooling | 20 | 10 | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Position | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.SeatBeltHeight | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Length | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Tilt | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Airbag.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.BottomLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarHeight | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.MidLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Recline | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.TopLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.UpperShoulderSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Angle | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Height | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.Middle.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Height | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.Level | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.TypeActive | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.HeatingCooling | 20 | 10 | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Position | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.SeatBeltHeight | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Length | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Tilt | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Airbag.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.BottomLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarHeight | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.MidLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Recline | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.TopLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.UpperShoulderSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Angle | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Height | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Height | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.Level | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.TypeActive | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.HeatingCooling | 20 | 10 | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Position | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.SeatBeltHeight | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Length | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Tilt | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Airbag.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.BottomLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarHeight | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.MidLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Recline | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.TopLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.UpperShoulderSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Angle | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Height | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Height | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.Level | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.TypeActive | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.HeatingCooling | 20 | 10 | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Position | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.SeatBeltHeight | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Length | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Tilt | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Airbag.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.BottomLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarHeight | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.MidLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Recline | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.TopLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.UpperShoulderSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Angle | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Height | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.Middle.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Height | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.Level | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.TypeActive | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.HeatingCooling | 20 | 10 | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Position | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.SeatBeltHeight | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Length | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Tilt | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Airbag.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.BottomLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarHeight | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.MidLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Recline | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.TopLumbarSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.UpperShoulderSupport | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Angle | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Height | 20 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Height | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.Level | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.TypeActive | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.FanSpeed | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.HeatingCooling | 20 | 10 | int8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Position | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.SeatBeltHeight | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.HeatingCooling | 20 | 10 | int8 | 0 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Length | 20 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportLeft | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportRight | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Tilt | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Ventilator | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Sunroof.Shade.IsOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Cabin.Sunroof.Shade.Position | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Sunroof.Slide | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Cabin.Sunroof.Tilt | 20 | 10 | uint8 | 50 | 100 |
+        
+    @CleanupRestoreServerforSet
+    Scenario Outline: Set requests are failed when the server is stopped
+        When the server is stopped for set
+        Then an attempt to set the actuator signal <path> to <datatype> <checked_value> is failed
+
+    Examples:
+        | path                                                     | datatype      | checked_value       |
+        | Vehicle.Cabin.Convertible.IsOpen | bool | true |
+        | Vehicle.Cabin.Convertible.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsLocked | bool | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsLocked | bool | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsLocked | bool | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsLocked | bool | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.Position | uint8 | 100 |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.IsOpen | bool | true |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.Position | uint8 | 100 |
+        | Vehicle.Cabin.HVAC.IsAirConditioningActive | bool | true |
+        | Vehicle.Cabin.HVAC.IsAutoPowerOptimize | bool | true |
+        | Vehicle.Cabin.HVAC.IsFrontDefrosterActive | bool | true |
+        | Vehicle.Cabin.HVAC.IsRearDefrosterActive | bool | true |
+        | Vehicle.Cabin.HVAC.IsRecirculationActive | bool | true |
+        | Vehicle.Cabin.HVAC.PowerOptimizeLevel | uint8 | 10 |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.AirDistribution | string | UP |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.Temperature | float | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.AirDistribution | string | UP |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.Temperature | float | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.AirDistribution | string | UP |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.Temperature | float | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.AirDistribution | string | UP |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.Temperature | float | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.AirDistribution | string | UP |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.Temperature | float | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.AirDistribution | string | UP |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.Temperature | float | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.AirDistribution | string | UP |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.Temperature | float | 3.4028235e+38 |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.AirDistribution | string | UP |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.Temperature | float | 3.4028235e+38 |
+        | Vehicle.Cabin.IsAutoPowerOptimize | bool | true |
+        | Vehicle.Cabin.IsWindowChildLockEngaged | bool | true |
+        | Vehicle.Cabin.Light.DomeLight.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.DomeLight.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.DomeLight.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.IsGloveBoxOn | bool | true |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Color | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Intensity | uint8 | 100 |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.IsLightOn | bool | true |
+        | Vehicle.Cabin.PowerOptimizeLevel | uint8 | 10 |
+        | Vehicle.Cabin.RearShade.IsOpen | bool | true |
+        | Vehicle.Cabin.RearShade.Position | uint8 | 100 |
+        | Vehicle.Cabin.RearviewMirror.DimmingLevel | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Airbag.IsEnabled | bool | true |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.BottomLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarHeight | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.MidLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Recline | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.TopLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.UpperShoulderSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Angle | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Height | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Height | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.Level | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Position | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.SeatBeltHeight | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Length | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Tilt | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Airbag.IsEnabled | bool | true |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.BottomLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarHeight | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.MidLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Recline | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.TopLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.UpperShoulderSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Angle | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Height | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row1.Middle.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Height | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.Level | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.TypeActive | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Position | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.SeatBeltHeight | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Length | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Tilt | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.Middle.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Airbag.IsEnabled | bool | true |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.BottomLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarHeight | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.MidLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Recline | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.TopLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.UpperShoulderSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Angle | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Height | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Height | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.Level | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Position | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.SeatBeltHeight | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Length | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Tilt | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Airbag.IsEnabled | bool | true |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.BottomLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarHeight | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.MidLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Recline | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.TopLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.UpperShoulderSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Angle | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Height | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Height | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.Level | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Position | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.SeatBeltHeight | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Length | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Tilt | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Airbag.IsEnabled | bool | true |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.BottomLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarHeight | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.MidLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Recline | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.TopLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.UpperShoulderSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Angle | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Height | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row2.Middle.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Height | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.Level | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.TypeActive | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Position | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.SeatBeltHeight | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Length | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Tilt | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.Middle.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Airbag.IsEnabled | bool | true |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.BottomLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarHeight | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.MidLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Recline | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.TopLumbarSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.UpperShoulderSupport | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Angle | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Height | uint8 | 255 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Height | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.Level | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.FanSpeed | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Position | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.SeatBeltHeight | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.HeatingCooling | int8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Length | uint16 | 65535 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportLeft | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportRight | float | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Tilt | float | 3.4028235e+38 |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Ventilator | uint8 | 100 |
+        | Vehicle.Cabin.Sunroof.Shade.IsOpen | bool | true |
+        | Vehicle.Cabin.Sunroof.Shade.Position | uint8 | 100 |
+        | Vehicle.Cabin.Sunroof.Slide | uint8 | 100 |
+        | Vehicle.Cabin.Sunroof.Tilt | uint8 | 100 |
+        
+
+    @CleanupRestoreNetworkforSet
+    Scenario Outline: Set requests are failed when the network communication failure
+        When network failure of <network_failure> is injected for set
+        Then an attempt to set the actuator signal <path> to <datatype> <checked_value> is failed
+
+    Examples:
+        | path                                                     | datatype      | checked_value       | network_failure       |
+        | Vehicle.Cabin.Convertible.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Convertible.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Convertible.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Convertible.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsLocked | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsLocked | bool | true | reject |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row1.DriverSide.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Shade.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row1.DriverSide.Window.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsLocked | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsLocked | bool | true | reject |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Shade.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row1.PassengerSide.Window.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsLocked | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsLocked | bool | true | reject |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row2.DriverSide.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Shade.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row2.DriverSide.Window.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsLocked | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsLocked | bool | true | reject |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Shade.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Door.Row2.PassengerSide.Window.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.HVAC.IsAirConditioningActive | bool | true | timeout |
+        | Vehicle.Cabin.HVAC.IsAirConditioningActive | bool | true | reject |
+        | Vehicle.Cabin.HVAC.IsAutoPowerOptimize | bool | true | timeout |
+        | Vehicle.Cabin.HVAC.IsAutoPowerOptimize | bool | true | reject |
+        | Vehicle.Cabin.HVAC.IsFrontDefrosterActive | bool | true | timeout |
+        | Vehicle.Cabin.HVAC.IsFrontDefrosterActive | bool | true | reject |
+        | Vehicle.Cabin.HVAC.IsRearDefrosterActive | bool | true | timeout |
+        | Vehicle.Cabin.HVAC.IsRearDefrosterActive | bool | true | reject |
+        | Vehicle.Cabin.HVAC.IsRecirculationActive | bool | true | timeout |
+        | Vehicle.Cabin.HVAC.IsRecirculationActive | bool | true | reject |
+        | Vehicle.Cabin.HVAC.PowerOptimizeLevel | uint8 | 10 | timeout |
+        | Vehicle.Cabin.HVAC.PowerOptimizeLevel | uint8 | 10 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.AirDistribution | string | UP | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.AirDistribution | string | UP | reject |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.Temperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row1.DriverSide.Temperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.AirDistribution | string | UP | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.AirDistribution | string | UP | reject |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.Temperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row1.PassengerSide.Temperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.AirDistribution | string | UP | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.AirDistribution | string | UP | reject |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.Temperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row2.DriverSide.Temperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.AirDistribution | string | UP | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.AirDistribution | string | UP | reject |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.Temperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row2.PassengerSide.Temperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.AirDistribution | string | UP | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.AirDistribution | string | UP | reject |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.Temperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row3.DriverSide.Temperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.AirDistribution | string | UP | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.AirDistribution | string | UP | reject |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.Temperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row3.PassengerSide.Temperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.AirDistribution | string | UP | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.AirDistribution | string | UP | reject |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.Temperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row4.DriverSide.Temperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.AirDistribution | string | UP | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.AirDistribution | string | UP | reject |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.Temperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.HVAC.Station.Row4.PassengerSide.Temperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.IsAutoPowerOptimize | bool | true | timeout |
+        | Vehicle.Cabin.IsAutoPowerOptimize | bool | true | reject |
+        | Vehicle.Cabin.IsWindowChildLockEngaged | bool | true | timeout |
+        | Vehicle.Cabin.IsWindowChildLockEngaged | bool | true | reject |
+        | Vehicle.Cabin.Light.DomeLight.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.DomeLight.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.DomeLight.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.DomeLight.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.DomeLight.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.DomeLight.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.DriverSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row1.PassengerSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.DriverSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row2.PassengerSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.DriverSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row3.PassengerSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.DriverSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.FootwellLight.Row4.PassengerSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.IsGloveBoxOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.IsGloveBoxOn | bool | true | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row1.DriverSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row1.PassengerSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row2.DriverSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row2.PassengerSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row3.DriverSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row3.PassengerSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row4.DriverSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Color | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Intensity | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.Intensity | uint8 | 100 | reject |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.IsLightOn | bool | true | timeout |
+        | Vehicle.Cabin.Light.Spotlight.Row4.PassengerSide.IsLightOn | bool | true | reject |
+        | Vehicle.Cabin.PowerOptimizeLevel | uint8 | 10 | timeout |
+        | Vehicle.Cabin.PowerOptimizeLevel | uint8 | 10 | reject |
+        | Vehicle.Cabin.RearShade.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.RearShade.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.RearShade.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.RearShade.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.RearviewMirror.DimmingLevel | uint8 | 100 | timeout |
+        | Vehicle.Cabin.RearviewMirror.DimmingLevel | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Airbag.IsEnabled | bool | true | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Airbag.IsEnabled | bool | true | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.BottomLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.BottomLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarHeight | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarHeight | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.LumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.MidLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.MidLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Recline | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Recline | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.TopLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.TopLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.UpperShoulderSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.UpperShoulderSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Backrest.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Angle | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Angle | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Height | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Headrest.Height | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Height | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Height | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.Level | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.Level | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.NeckScarf.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Position | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Position | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.SeatBeltHeight | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.SeatBeltHeight | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Length | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Length | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Seating.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Tilt | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Tilt | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.DriverSide.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Airbag.IsEnabled | bool | true | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Airbag.IsEnabled | bool | true | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.BottomLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.BottomLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarHeight | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarHeight | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.LumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.MidLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.MidLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Recline | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Recline | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.TopLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.TopLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.UpperShoulderSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.UpperShoulderSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Backrest.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Angle | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Angle | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Height | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Headrest.Height | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Height | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Height | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.Level | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.Level | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.NeckScarf.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Position | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Position | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.SeatBeltHeight | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.SeatBeltHeight | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Length | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Length | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Seating.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Tilt | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Tilt | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row1.Middle.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.Middle.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Airbag.IsEnabled | bool | true | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Airbag.IsEnabled | bool | true | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.BottomLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.BottomLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarHeight | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarHeight | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.LumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.MidLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.MidLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Recline | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Recline | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.TopLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.TopLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.UpperShoulderSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.UpperShoulderSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Backrest.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Angle | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Angle | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Height | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Headrest.Height | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Height | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Height | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.Level | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.Level | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.NeckScarf.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Position | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Position | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.SeatBeltHeight | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.SeatBeltHeight | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Length | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Length | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Seating.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Tilt | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Tilt | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row1.PassengerSide.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Airbag.IsEnabled | bool | true | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Airbag.IsEnabled | bool | true | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.BottomLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.BottomLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarHeight | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarHeight | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.LumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.MidLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.MidLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Recline | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Recline | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.TopLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.TopLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.UpperShoulderSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.UpperShoulderSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Backrest.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Angle | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Angle | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Height | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Headrest.Height | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Height | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Height | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.Level | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.Level | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.NeckScarf.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Position | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Position | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.SeatBeltHeight | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.SeatBeltHeight | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Length | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Length | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Seating.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Tilt | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Tilt | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.DriverSide.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Airbag.IsEnabled | bool | true | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Airbag.IsEnabled | bool | true | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.BottomLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.BottomLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarHeight | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarHeight | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.LumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.MidLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.MidLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Recline | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Recline | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.TopLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.TopLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.UpperShoulderSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.UpperShoulderSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Backrest.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Angle | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Angle | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Height | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Headrest.Height | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Height | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Height | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.Level | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.Level | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.NeckScarf.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Position | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Position | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.SeatBeltHeight | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.SeatBeltHeight | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Length | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Length | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Seating.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Tilt | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Tilt | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row2.Middle.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.Middle.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Airbag.IsEnabled | bool | true | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Airbag.IsEnabled | bool | true | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.BottomLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.BottomLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarHeight | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarHeight | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.LumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.MidLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.MidLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Recline | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Recline | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.TopLumbarSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.TopLumbarSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.UpperShoulderSupport | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.UpperShoulderSupport | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Backrest.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Angle | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Angle | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Height | uint8 | 255 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Headrest.Height | uint8 | 255 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Height | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Height | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.Level | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.Level | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Massage.TypeActive | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.FanSpeed | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.FanSpeed | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.NeckScarf.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Position | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Position | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.SeatBeltHeight | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.SeatBeltHeight | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.HeatingCooling | int8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.HeatingCooling | int8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Length | uint16 | 65535 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Length | uint16 | 65535 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportLeft | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportLeft | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportRight | float | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.SideBolsterSupportRight | float | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Seating.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Tilt | float | 3.4028235e+38 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Tilt | float | 3.4028235e+38 | reject |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Ventilator | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Seat.Row2.PassengerSide.Ventilator | uint8 | 100 | reject |
+        | Vehicle.Cabin.Sunroof.Shade.IsOpen | bool | true | timeout |
+        | Vehicle.Cabin.Sunroof.Shade.IsOpen | bool | true | reject |
+        | Vehicle.Cabin.Sunroof.Shade.Position | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Sunroof.Shade.Position | uint8 | 100 | reject |
+        | Vehicle.Cabin.Sunroof.Slide | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Sunroof.Slide | uint8 | 100 | reject |
+        | Vehicle.Cabin.Sunroof.Tilt | uint8 | 100 | timeout |
+        | Vehicle.Cabin.Sunroof.Tilt | uint8 | 100 | reject |
+        
