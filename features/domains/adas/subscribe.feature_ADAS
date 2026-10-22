@@ -1,0 +1,213 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: Subscribe
+
+    Scenario Outline: HeadlessApp_Subscribe_Sensor_Value
+        Given PAL set sensor signal <path> to <datatype> <value>
+        Given HeadlessApp subscribe the sensor signal <path> of <datatype>
+        Then PAL set the signal at <path> of <datatype> to <values> by order, subscribe stream receive the same data
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                         | datatype  | value            | values            |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | ["SAE_0","SAE_1","SAE_2_DISENGAGING"] |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | ["3.4028235e+38","1.70141175e+38","0.0"] |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | ["{\"MostProbable\":{\"type\":\"float\",\"value\":100},\"LowerBound\":{\"type\":\"float\",\"value\":100},\"UpperBound\":{\"type\":\"float\",\"value\":100}}","{\"MostProbable\":{\"type\":\"float\",\"value\":50},\"LowerBound\":{\"type\":\"float\",\"value\":50},\"UpperBound\":{\"type\":\"float\",\"value\":50}}","{\"MostProbable\":{\"type\":\"float\",\"value\":0},\"LowerBound\":{\"type\":\"float\",\"value\":0},\"UpperBound\":{\"type\":\"float\",\"value\":0}}"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | ["2147483647","0","-2147483648"] |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | ["10","5","0"] |
+        
+    Scenario Outline: Notification of subscribed signals
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        
+    Scenario Outline: Notification is delivered even if the signal is unavailable as sensor
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> as unavailable
+        Then the subscribe stream returns <datatype> <value_1> on <path> as unavailable as sensor
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        
+    Scenario Outline: Notification carries IsAvailableActuator as true when reported by the producer
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> as available actuator
+        Then the subscription stream returns available actuator on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        
+    Scenario Outline: Notification carries a produced timestamp when the producer attaches one
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> with a produced timestamp
+        Then the subscribe stream returns a produced timestamp on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        
+    Scenario Outline: Multiple subscriptions to a signal
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count         | duplex        | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | 2 | 1 | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | 2 | 1 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ESC.RoadFriction | 2 | 1 | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | 2 | 1 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.PowerOptimizeLevel | 2 | 1 | uint8 | 5 | 10 |
+        
+    Scenario Outline: Notification issued even if signal value being changed
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>, which is equal to the current value
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        
+    Scenario Outline: Millions of subscribe requests do not kill kura server & subscription_ids are correctly returned
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | 100 | 10 | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | 100 | 10 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ESC.RoadFriction | 100 | 10 | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | 100 | 10 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.PowerOptimizeLevel | 100 | 10 | uint8 | 5 | 10 |
+        
+    @CleanupRestoreServer
+    Scenario Outline: Subscribe requests are failed when the server is stopped
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When the server is stopped
+        Then an attempt to subscribe the signal at <path> of datatype <datatype> is failed
+
+    Examples:
+        | path                                                     | datatype      | value_0       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 |
+        
+    @CleanupRestoreNetwork
+    Scenario Outline: Subscribe requests are failed when the network communication failure
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        Then an attempt to subscribe the signal at <path> of datatype <datatype> is failed
+
+    Examples:
+        | path                                                     | datatype      | value_0       | network_failure       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | timeout |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | reject  |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | timeout |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | reject  |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | timeout |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | reject  |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | timeout |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | reject  |
+        
+    Scenario Outline: Subscribe contexts are no longer available after the server is reset
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the server is reset
+        And the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream for the signal <path> returns no data
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        
+    Scenario Outline: All updates are notified to subscriptions without any drops even large burden on server or network
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the signal at <path> of numeric datatype <datatype> is updated <count> times, any updates are captured from subscribe stream
+        Then HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count            | datatype      | value_0       |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | 10 | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | 10 | int32 | 0 |
+        | Vehicle.ADAS.PowerOptimizeLevel | 10 | uint8 | 5 |
+        

@@ -1,0 +1,9 @@
+services:
+  dev:
+    pull_policy: always
+    image: ${YORIITO_DEVCONTAINER}:${YORIITO_VERSION}
+    command: sleep infinity
+    volumes:
+      - ${ROOT_DIR}:/work
+    cap_add:
+      - NET_ADMIN

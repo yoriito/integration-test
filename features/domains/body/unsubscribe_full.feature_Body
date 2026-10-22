@@ -1,0 +1,834 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: UnSubscribe
+
+    Scenario Outline: The unsubscribe request for a signal that is currently subscribed has been successfully processed
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        Then attempts to unsubscribe the signal at <path> of datatype <datatype> is succeeded
+
+    Examples:
+        | path                                                     | datatype  | value_0     |
+        | Vehicle.Body.Hood.IsLocked | bool | false |
+        | Vehicle.Body.Hood.IsOpen | bool | false |
+        | Vehicle.Body.Hood.Position | uint8 | 50 |
+        | Vehicle.Body.Horn.IsActive | bool | false |
+        | Vehicle.Body.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Body.Lights.Backup.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Backup.IsOn | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsOn | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | bool | false |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE |
+        | Vehicle.Body.Lights.Brake.IsDefect | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsDefect | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsDefect | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsDefect | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | bool | false |
+        | Vehicle.Body.Lights.Parking.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Parking.IsOn | bool | false |
+        | Vehicle.Body.Lights.Running.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Running.IsOn | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | int8 | 0 |
+        | Vehicle.Body.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Body.Raindetection.Intensity | uint8 | 50 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLocked | bool | false |
+        | Vehicle.Body.Trunk.Front.IsOpen | bool | false |
+        | Vehicle.Body.Trunk.Front.Position | uint8 | 50 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLocked | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsOpen | bool | false |
+        | Vehicle.Body.Trunk.Rear.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | bool | false |
+        | Vehicle.Body.Windshield.Front.WasherFluid.Level | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.IsWipersWorn | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | string | SLOW |
+        | Vehicle.Body.Windshield.Front.Wiping.System.DriveCurrent | float | 0.0 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsBlocked | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsEndingWipeCycle | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsOverheated | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsPositionReached | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiperError | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiping | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | string | WIPE |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.WiperWear | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | bool | false |
+        | Vehicle.Body.Windshield.Rear.WasherFluid.Level | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.IsWipersWorn | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | string | SLOW |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.DriveCurrent | float | 0.0 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsBlocked | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsEndingWipeCycle | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsOverheated | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsPositionReached | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiperError | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiping | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | string | WIPE |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.WiperWear | uint8 | 50 |
+        
+
+
+    Scenario Outline: Unsubscribe of one subscription_id does not hinder other subscription_ids
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When attempts to unsubscribe the signal at <path> of datatype <datatype> is succeeded
+        And the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then The other subscription_ids stream returns <datatype> <value_1> on <path>
+
+    Examples:
+        | path                                                     | count         | duplex        | datatype      | value_0       | value_1       |
+        | Vehicle.Body.Hood.IsLocked | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Hood.IsOpen | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Hood.Position | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Body.Horn.IsActive | 2 | 1 | bool | false | true |
+        | Vehicle.Body.IsAutoPowerOptimize | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Backup.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Backup.IsOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Beam.High.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Beam.High.IsOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Beam.Low.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Brake.IsActive | 2 | 1 | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Lights.Brake.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Front.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Rear.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Hazard.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.LicensePlate.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Parking.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Parking.IsOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Running.IsDefect | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Lights.Running.IsOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | 2 | 1 | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | 2 | 1 | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | 2 | 1 | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | 2 | 1 | int8 | 0 | 100 |
+        | Vehicle.Body.PowerOptimizeLevel | 2 | 1 | uint8 | 5 | 10 |
+        | Vehicle.Body.Raindetection.Intensity | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Body.RearMainSpoilerPosition | 2 | 1 | float | 50 | 100 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Trunk.Front.IsLocked | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Trunk.Front.IsOpen | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Trunk.Front.Position | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.IsLocked | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.IsOpen | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.Position | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.WasherFluid.Level | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | 2 | 1 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Front.Wiping.IsWipersWorn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | 2 | 1 | string | SLOW | OFF |
+        | Vehicle.Body.Windshield.Front.Wiping.System.DriveCurrent | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | 2 | 1 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsBlocked | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsEndingWipeCycle | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsOverheated | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsPositionReached | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiperError | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiping | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | 2 | 1 | string | WIPE | STOP_HOLD |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Front.Wiping.WiperWear | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.WasherFluid.Level | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | 2 | 1 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Rear.Wiping.IsWipersWorn | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | 2 | 1 | string | SLOW | OFF |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.DriveCurrent | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | 2 | 1 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsBlocked | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsEndingWipeCycle | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsOverheated | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsPositionReached | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiperError | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiping | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | 2 | 1 | string | WIPE | STOP_HOLD |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Rear.Wiping.WiperWear | 2 | 1 | uint8 | 50 | 100 |
+        
+
+
+    Scenario Outline: Millions of unsubscribe requests do not kill kura server
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        Then HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections with duplex <duplex> are all succeeded
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | value_0       | value_1       |
+        | Vehicle.Body.Hood.IsLocked | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Hood.IsOpen | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Hood.Position | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Horn.IsActive | 100 | 10 | bool | false | true |
+        | Vehicle.Body.IsAutoPowerOptimize | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Backup.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Backup.IsOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Beam.High.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Beam.High.IsOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Beam.Low.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Brake.IsActive | 100 | 10 | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Lights.Brake.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Front.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Rear.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Hazard.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.LicensePlate.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Parking.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Parking.IsOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Running.IsDefect | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Lights.Running.IsOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | 100 | 10 | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | 100 | 10 | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | 100 | 10 | int8 | 0 | 100 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | 100 | 10 | int8 | 0 | 100 |
+        | Vehicle.Body.PowerOptimizeLevel | 100 | 10 | uint8 | 5 | 10 |
+        | Vehicle.Body.Raindetection.Intensity | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.RearMainSpoilerPosition | 100 | 10 | float | 50 | 100 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Front.IsLocked | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Front.IsOpen | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Front.Position | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.IsLocked | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.IsOpen | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Trunk.Rear.Position | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.WasherFluid.Level | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | 100 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Front.Wiping.IsWipersWorn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | 100 | 10 | string | SLOW | OFF |
+        | Vehicle.Body.Windshield.Front.Wiping.System.DriveCurrent | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | 100 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsBlocked | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsEndingWipeCycle | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsOverheated | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsPositionReached | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiperError | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiping | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | 100 | 10 | string | WIPE | STOP_HOLD |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Front.Wiping.WiperWear | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.WasherFluid.Level | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | 100 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Rear.Wiping.IsWipersWorn | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | 100 | 10 | string | SLOW | OFF |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.DriveCurrent | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | 100 | 10 | uint8 | 127 | 255 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsBlocked | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsEndingWipeCycle | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsOverheated | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsPositionReached | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiperError | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiping | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | 100 | 10 | string | WIPE | STOP_HOLD |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Windshield.Rear.Wiping.WiperWear | 100 | 10 | uint8 | 50 | 100 |
+        
+
+
+    @CleanupRestoreNetwork
+    Scenario Outline: Unsubscribe requests during network failure result in client error
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are failed
+
+    Examples:
+        | path                                          | network_failure | datatype  | value     |
+        | Vehicle.Body.Hood.IsLocked | reject  | bool | false |
+        | Vehicle.Body.Hood.IsLocked | timeout | bool | false |
+        | Vehicle.Body.Hood.IsOpen | reject  | bool | false |
+        | Vehicle.Body.Hood.IsOpen | timeout | bool | false |
+        | Vehicle.Body.Hood.Position | reject  | uint8 | 50 |
+        | Vehicle.Body.Hood.Position | timeout | uint8 | 50 |
+        | Vehicle.Body.Horn.IsActive | reject  | bool | false |
+        | Vehicle.Body.Horn.IsActive | timeout | bool | false |
+        | Vehicle.Body.IsAutoPowerOptimize | reject  | bool | false |
+        | Vehicle.Body.IsAutoPowerOptimize | timeout | bool | false |
+        | Vehicle.Body.Lights.Backup.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Backup.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Backup.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Backup.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Brake.IsActive | reject  | string | ACTIVE |
+        | Vehicle.Body.Lights.Brake.IsActive | timeout | string | ACTIVE |
+        | Vehicle.Body.Lights.Brake.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Brake.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | reject  | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | timeout | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | reject  | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | timeout | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | reject  | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | timeout | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Parking.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Parking.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Parking.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Parking.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Running.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Running.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Running.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Running.IsOn | timeout | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | reject  | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | timeout | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | reject  | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | timeout | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | reject  | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | timeout | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | reject  | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | timeout | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | reject  | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | timeout | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | reject  | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | timeout | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | reject  | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | timeout | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | reject  | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | timeout | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | reject  | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | timeout | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | reject  | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | timeout | int8 | 0 |
+        | Vehicle.Body.PowerOptimizeLevel | reject  | uint8 | 5 |
+        | Vehicle.Body.PowerOptimizeLevel | timeout | uint8 | 5 |
+        | Vehicle.Body.Raindetection.Intensity | reject  | uint8 | 50 |
+        | Vehicle.Body.Raindetection.Intensity | timeout | uint8 | 50 |
+        | Vehicle.Body.RearMainSpoilerPosition | reject  | float | 50 |
+        | Vehicle.Body.RearMainSpoilerPosition | timeout | float | 50 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | reject  | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLightOn | timeout | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLocked | reject  | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLocked | timeout | bool | false |
+        | Vehicle.Body.Trunk.Front.IsOpen | reject  | bool | false |
+        | Vehicle.Body.Trunk.Front.IsOpen | timeout | bool | false |
+        | Vehicle.Body.Trunk.Front.Position | reject  | uint8 | 50 |
+        | Vehicle.Body.Trunk.Front.Position | timeout | uint8 | 50 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | reject  | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | timeout | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLocked | reject  | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLocked | timeout | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsOpen | reject  | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsOpen | timeout | bool | false |
+        | Vehicle.Body.Trunk.Rear.Position | reject  | uint8 | 50 |
+        | Vehicle.Body.Trunk.Rear.Position | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.WasherFluid.Level | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.WasherFluid.Level | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | reject  | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | timeout | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.IsWipersWorn | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.IsWipersWorn | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | reject  | string | SLOW |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | timeout | string | SLOW |
+        | Vehicle.Body.Windshield.Front.Wiping.System.DriveCurrent | reject  | float | 0.0 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.DriveCurrent | timeout | float | 0.0 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | reject  | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | timeout | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsBlocked | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsBlocked | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsEndingWipeCycle | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsEndingWipeCycle | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsOverheated | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsOverheated | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsPositionReached | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsPositionReached | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiperError | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiperError | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiping | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiping | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | reject  | string | WIPE |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | timeout | string | WIPE |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.WiperWear | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.WiperWear | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.WasherFluid.Level | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.WasherFluid.Level | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | reject  | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | timeout | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.IsWipersWorn | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.IsWipersWorn | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | reject  | string | SLOW |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | timeout | string | SLOW |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.DriveCurrent | reject  | float | 0.0 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.DriveCurrent | timeout | float | 0.0 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | reject  | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | timeout | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsBlocked | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsBlocked | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsEndingWipeCycle | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsEndingWipeCycle | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsOverheated | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsOverheated | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsPositionReached | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsPositionReached | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiperError | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiperError | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiping | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiping | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | reject  | string | WIPE |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | timeout | string | WIPE |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.WiperWear | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.WiperWear | timeout | uint8 | 50 |
+        
+
+
+    Scenario Outline: Unsubscribe requests after recovery from network failure are succeeded
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        And network is restored from the failure
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are succeeded
+
+    Examples:
+        | path                                          | network_failure | datatype  | value     |
+        | Vehicle.Body.Hood.IsLocked | reject  | bool | false |
+        | Vehicle.Body.Hood.IsLocked | timeout | bool | false |
+        | Vehicle.Body.Hood.IsOpen | reject  | bool | false |
+        | Vehicle.Body.Hood.IsOpen | timeout | bool | false |
+        | Vehicle.Body.Hood.Position | reject  | uint8 | 50 |
+        | Vehicle.Body.Hood.Position | timeout | uint8 | 50 |
+        | Vehicle.Body.Horn.IsActive | reject  | bool | false |
+        | Vehicle.Body.Horn.IsActive | timeout | bool | false |
+        | Vehicle.Body.IsAutoPowerOptimize | reject  | bool | false |
+        | Vehicle.Body.IsAutoPowerOptimize | timeout | bool | false |
+        | Vehicle.Body.Lights.Backup.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Backup.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Backup.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Backup.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Brake.IsActive | reject  | string | ACTIVE |
+        | Vehicle.Body.Lights.Brake.IsActive | timeout | string | ACTIVE |
+        | Vehicle.Body.Lights.Brake.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Brake.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | reject  | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | timeout | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | reject  | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | timeout | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | reject  | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | timeout | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Parking.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Parking.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Parking.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Parking.IsOn | timeout | bool | false |
+        | Vehicle.Body.Lights.Running.IsDefect | reject  | bool | false |
+        | Vehicle.Body.Lights.Running.IsDefect | timeout | bool | false |
+        | Vehicle.Body.Lights.Running.IsOn | reject  | bool | false |
+        | Vehicle.Body.Lights.Running.IsOn | timeout | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | reject  | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | timeout | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | reject  | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | timeout | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | reject  | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | timeout | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | reject  | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | timeout | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | reject  | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | timeout | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | reject  | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | timeout | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | reject  | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | timeout | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | reject  | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | timeout | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | reject  | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | timeout | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | reject  | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | timeout | int8 | 0 |
+        | Vehicle.Body.PowerOptimizeLevel | reject  | uint8 | 5 |
+        | Vehicle.Body.PowerOptimizeLevel | timeout | uint8 | 5 |
+        | Vehicle.Body.Raindetection.Intensity | reject  | uint8 | 50 |
+        | Vehicle.Body.Raindetection.Intensity | timeout | uint8 | 50 |
+        | Vehicle.Body.RearMainSpoilerPosition | reject  | float | 50 |
+        | Vehicle.Body.RearMainSpoilerPosition | timeout | float | 50 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | reject  | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLightOn | timeout | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLocked | reject  | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLocked | timeout | bool | false |
+        | Vehicle.Body.Trunk.Front.IsOpen | reject  | bool | false |
+        | Vehicle.Body.Trunk.Front.IsOpen | timeout | bool | false |
+        | Vehicle.Body.Trunk.Front.Position | reject  | uint8 | 50 |
+        | Vehicle.Body.Trunk.Front.Position | timeout | uint8 | 50 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | reject  | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | timeout | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLocked | reject  | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLocked | timeout | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsOpen | reject  | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsOpen | timeout | bool | false |
+        | Vehicle.Body.Trunk.Rear.Position | reject  | uint8 | 50 |
+        | Vehicle.Body.Trunk.Rear.Position | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.WasherFluid.Level | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.WasherFluid.Level | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | reject  | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | timeout | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.IsWipersWorn | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.IsWipersWorn | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | reject  | string | SLOW |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | timeout | string | SLOW |
+        | Vehicle.Body.Windshield.Front.Wiping.System.DriveCurrent | reject  | float | 0.0 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.DriveCurrent | timeout | float | 0.0 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | reject  | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | timeout | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsBlocked | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsBlocked | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsEndingWipeCycle | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsEndingWipeCycle | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsOverheated | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsOverheated | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsPositionReached | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsPositionReached | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiperError | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiperError | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiping | reject  | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiping | timeout | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | reject  | string | WIPE |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | timeout | string | WIPE |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.WiperWear | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.WiperWear | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.WasherFluid.Level | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.WasherFluid.Level | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | reject  | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | timeout | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.IsWipersWorn | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.IsWipersWorn | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | reject  | string | SLOW |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | timeout | string | SLOW |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.DriveCurrent | reject  | float | 0.0 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.DriveCurrent | timeout | float | 0.0 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | reject  | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | timeout | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsBlocked | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsBlocked | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsEndingWipeCycle | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsEndingWipeCycle | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsOverheated | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsOverheated | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsPositionReached | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsPositionReached | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiperError | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiperError | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiping | reject  | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiping | timeout | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | reject  | string | WIPE |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | timeout | string | WIPE |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | timeout | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.WiperWear | reject  | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.WiperWear | timeout | uint8 | 50 |
+        
+
+
+    @CleanupRestoreServer
+    Scenario Outline: Unsubscribe requests during server down result in client error
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When the server is stopped
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are failed
+
+    Examples:
+        | path                                          | datatype  | value   |
+        | Vehicle.Body.Hood.IsLocked | bool | false |
+        | Vehicle.Body.Hood.IsOpen | bool | false |
+        | Vehicle.Body.Hood.Position | uint8 | 50 |
+        | Vehicle.Body.Horn.IsActive | bool | false |
+        | Vehicle.Body.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Body.Lights.Backup.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Backup.IsOn | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsOn | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | bool | false |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE |
+        | Vehicle.Body.Lights.Brake.IsDefect | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsDefect | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsDefect | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsDefect | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | bool | false |
+        | Vehicle.Body.Lights.Parking.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Parking.IsOn | bool | false |
+        | Vehicle.Body.Lights.Running.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Running.IsOn | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | int8 | 0 |
+        | Vehicle.Body.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Body.Raindetection.Intensity | uint8 | 50 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLocked | bool | false |
+        | Vehicle.Body.Trunk.Front.IsOpen | bool | false |
+        | Vehicle.Body.Trunk.Front.Position | uint8 | 50 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLocked | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsOpen | bool | false |
+        | Vehicle.Body.Trunk.Rear.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | bool | false |
+        | Vehicle.Body.Windshield.Front.WasherFluid.Level | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.IsWipersWorn | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | string | SLOW |
+        | Vehicle.Body.Windshield.Front.Wiping.System.DriveCurrent | float | 0.0 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsBlocked | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsEndingWipeCycle | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsOverheated | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsPositionReached | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiperError | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiping | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | string | WIPE |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.WiperWear | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | bool | false |
+        | Vehicle.Body.Windshield.Rear.WasherFluid.Level | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.IsWipersWorn | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | string | SLOW |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.DriveCurrent | float | 0.0 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsBlocked | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsEndingWipeCycle | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsOverheated | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsPositionReached | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiperError | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiping | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | string | WIPE |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.WiperWear | uint8 | 50 |
+        
+
+
+    @CleanupRestoreServer
+    Scenario Outline: Unsubscribe requests after server reset are succeeded
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When the server is reset
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are succeeded
+
+    Examples:
+        | path                                          | datatype  | value   |
+        | Vehicle.Body.Hood.IsLocked | bool | false |
+        | Vehicle.Body.Hood.IsOpen | bool | false |
+        | Vehicle.Body.Hood.Position | uint8 | 50 |
+        | Vehicle.Body.Horn.IsActive | bool | false |
+        | Vehicle.Body.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Body.Lights.Backup.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Backup.IsOn | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Beam.High.IsOn | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Beam.Low.IsOn | bool | false |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE |
+        | Vehicle.Body.Lights.Brake.IsDefect | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsDefect | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Left.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsDefect | bool | false |
+        | Vehicle.Body.Lights.DirectionIndicator.Right.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Fog.Front.IsOn | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Fog.Rear.IsOn | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Hazard.IsSignaling | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsDefect | bool | false |
+        | Vehicle.Body.Lights.LicensePlate.IsOn | bool | false |
+        | Vehicle.Body.Lights.Parking.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Parking.IsOn | bool | false |
+        | Vehicle.Body.Lights.Running.IsDefect | bool | false |
+        | Vehicle.Body.Lights.Running.IsOn | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsFolded | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsHeatingOn | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.IsLocked | bool | false |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 |
+        | Vehicle.Body.Mirrors.DriverSide.Yaw | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.IsFolded | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsHeatingOn | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.IsLocked | bool | false |
+        | Vehicle.Body.Mirrors.PassengerSide.Tilt | int8 | 0 |
+        | Vehicle.Body.Mirrors.PassengerSide.Yaw | int8 | 0 |
+        | Vehicle.Body.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Body.Raindetection.Intensity | uint8 | 50 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 |
+        | Vehicle.Body.Trunk.Front.IsLightOn | bool | false |
+        | Vehicle.Body.Trunk.Front.IsLocked | bool | false |
+        | Vehicle.Body.Trunk.Front.IsOpen | bool | false |
+        | Vehicle.Body.Trunk.Front.Position | uint8 | 50 |
+        | Vehicle.Body.Trunk.Rear.IsLightOn | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsLocked | bool | false |
+        | Vehicle.Body.Trunk.Rear.IsOpen | bool | false |
+        | Vehicle.Body.Trunk.Rear.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.IsHeatingOn | bool | false |
+        | Vehicle.Body.Windshield.Front.WasherFluid.Level | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.Intensity | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.IsWipersWorn | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.Mode | string | SLOW |
+        | Vehicle.Body.Windshield.Front.Wiping.System.DriveCurrent | float | 0.0 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Frequency | uint8 | 127 |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsBlocked | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsEndingWipeCycle | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsOverheated | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsPositionReached | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiperError | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.IsWiping | bool | false |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Mode | string | WIPE |
+        | Vehicle.Body.Windshield.Front.Wiping.System.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Front.Wiping.WiperWear | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.IsHeatingOn | bool | false |
+        | Vehicle.Body.Windshield.Rear.WasherFluid.Level | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.Intensity | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.IsWipersWorn | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.Mode | string | SLOW |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.DriveCurrent | float | 0.0 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Frequency | uint8 | 127 |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsBlocked | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsEndingWipeCycle | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsOverheated | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsPositionReached | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiperError | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.IsWiping | bool | false |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Mode | string | WIPE |
+        | Vehicle.Body.Windshield.Rear.Wiping.System.Position | uint8 | 50 |
+        | Vehicle.Body.Windshield.Rear.Wiping.WiperWear | uint8 | 50 |
+        
+

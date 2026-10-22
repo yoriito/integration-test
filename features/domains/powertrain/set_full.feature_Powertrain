@@ -1,0 +1,399 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: Signal API set
+
+    @coldstart @serial
+    Scenario Outline: Cold start once and seed initial actuator values
+        Given Kura service is cleanly restarted
+        When HeadlessApp sets the following actuator signals
+        | path                                                     | datatype | value         |
+        | Vehicle.Powertrain.FuelSystem.IsFuelPortFlapOpen | bool | false |
+        | Vehicle.Powertrain.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Powertrain.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargeLimit | uint8 | 50 |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging | string | STOP |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode | string | START_TIME |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Time | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTemperature | float | 0.0 |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTemperature | float | 0.0 |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTemperature | float | 0.0 |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTemperature | float | 0.0 |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.Transmission.ClutchEngagement | float | 50 |
+        | Vehicle.Powertrain.Transmission.DiffLockCenterEngagement | float | 50 |
+        | Vehicle.Powertrain.Transmission.DiffLockFrontEngagement | float | 50 |
+        | Vehicle.Powertrain.Transmission.DiffLockRearEngagement | float | 50 |
+        | Vehicle.Powertrain.Transmission.GearChangeMode | string | AUTOMATIC |
+        | Vehicle.Powertrain.Transmission.IsElectricalPowertrainEngaged | bool | false |
+        | Vehicle.Powertrain.Transmission.IsLowRangeEngaged | bool | false |
+        | Vehicle.Powertrain.Transmission.IsParkLockEngaged | bool | false |
+        | Vehicle.Powertrain.Transmission.PerformanceMode | string | SPORT |
+        | Vehicle.Powertrain.Transmission.SelectedGear | int8 | 0 |
+        | Vehicle.Powertrain.Transmission.TorqueDistribution | float | 0 |
+        
+        Then PAL should report the following actuator signals
+        | path                                                     | datatype | value         |
+        | Vehicle.Powertrain.FuelSystem.IsFuelPortFlapOpen | bool | false |
+        | Vehicle.Powertrain.IsAutoPowerOptimize | bool | false |
+        | Vehicle.Powertrain.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargeLimit | uint8 | 50 |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsChargingCableLocked | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsFlapOpen | bool | false |
+        | Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging | string | STOP |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode | string | START_TIME |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Time | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTemperature | float | 0.0 |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTemperature | float | 0.0 |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTemperature | float | 0.0 |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTemperature | float | 0.0 |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Powertrain.Transmission.ClutchEngagement | float | 50 |
+        | Vehicle.Powertrain.Transmission.DiffLockCenterEngagement | float | 50 |
+        | Vehicle.Powertrain.Transmission.DiffLockFrontEngagement | float | 50 |
+        | Vehicle.Powertrain.Transmission.DiffLockRearEngagement | float | 50 |
+        | Vehicle.Powertrain.Transmission.GearChangeMode | string | AUTOMATIC |
+        | Vehicle.Powertrain.Transmission.IsElectricalPowertrainEngaged | bool | false |
+        | Vehicle.Powertrain.Transmission.IsLowRangeEngaged | bool | false |
+        | Vehicle.Powertrain.Transmission.IsParkLockEngaged | bool | false |
+        | Vehicle.Powertrain.Transmission.PerformanceMode | string | SPORT |
+        | Vehicle.Powertrain.Transmission.SelectedGear | int8 | 0 |
+        | Vehicle.Powertrain.Transmission.TorqueDistribution | float | 0 |
+        
+    @warm @serial
+    Scenario Outline: Overwrite/confirm after cold start (no restart)
+        Given Set the actuator signal <path> to <datatype> <default_value>
+        When HeadlessApp set the actuator signal <path> to <datatype> <checked_value>
+        Then the result obtained from the actuator signal by PAL should be <datatype> <checked_value> on <path>
+
+    Examples:
+        | path                                                     | datatype | default_value | checked_value |
+        | Vehicle.Powertrain.FuelSystem.IsFuelPortFlapOpen | bool | false | true |
+        | Vehicle.Powertrain.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.Powertrain.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargeLimit | uint8 | 50 | 100 |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsChargingCableLocked | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsFlapOpen | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsChargingCableLocked | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsFlapOpen | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsChargingCableLocked | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsFlapOpen | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsChargingCableLocked | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsFlapOpen | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsChargingCableLocked | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsFlapOpen | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsChargingCableLocked | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsFlapOpen | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsChargingCableLocked | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsFlapOpen | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging | string | STOP | START |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode | string | START_TIME | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Time | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTemperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTemperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTemperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.RequestedMode | string | FAST_CHARGING_PREPARATION | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.StartTime | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTemperature | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTime | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.Transmission.ClutchEngagement | float | 50 | 100 |
+        | Vehicle.Powertrain.Transmission.DiffLockCenterEngagement | float | 50 | 100 |
+        | Vehicle.Powertrain.Transmission.DiffLockFrontEngagement | float | 50 | 100 |
+        | Vehicle.Powertrain.Transmission.DiffLockRearEngagement | float | 50 | 100 |
+        | Vehicle.Powertrain.Transmission.GearChangeMode | string | AUTOMATIC | MANUAL |
+        | Vehicle.Powertrain.Transmission.IsElectricalPowertrainEngaged | bool | false | true |
+        | Vehicle.Powertrain.Transmission.IsLowRangeEngaged | bool | false | true |
+        | Vehicle.Powertrain.Transmission.IsParkLockEngaged | bool | false | true |
+        | Vehicle.Powertrain.Transmission.PerformanceMode | string | SPORT | NORMAL |
+        | Vehicle.Powertrain.Transmission.SelectedGear | int8 | 0 | 127 |
+        | Vehicle.Powertrain.Transmission.TorqueDistribution | float | 0 | 100 |
+        
+    Scenario Outline: Millions of set requests do not kill kura server & values remain consistent
+        When HeadlessApp set the signal <path> to <datatype> <checked_value> <count> times with duplex <duplex>
+        Then the result obtained from the actuator signal by PAL should be <datatype> <checked_value> on <path>
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | default_value | checked_value |
+        | Vehicle.Powertrain.FuelSystem.IsFuelPortFlapOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.IsAutoPowerOptimize | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.PowerOptimizeLevel | 20 | 10 | uint8 | 5 | 10 |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargeLimit | 20 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsChargingCableLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsFlapOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsChargingCableLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsFlapOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsChargingCableLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsFlapOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsChargingCableLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsFlapOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsChargingCableLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsFlapOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsChargingCableLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsFlapOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsChargingCableLocked | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsFlapOpen | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging | 20 | 10 | string | STOP | START |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode | 20 | 10 | string | START_TIME | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Time | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.RequestedMode | 20 | 10 | string | FAST_CHARGING_PREPARATION | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.StartTime | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTemperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTime | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.RequestedMode | 20 | 10 | string | FAST_CHARGING_PREPARATION | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.StartTime | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTemperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTime | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.RequestedMode | 20 | 10 | string | FAST_CHARGING_PREPARATION | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.StartTime | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTemperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTime | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.RequestedMode | 20 | 10 | string | FAST_CHARGING_PREPARATION | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.StartTime | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTemperature | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTime | 20 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.Transmission.ClutchEngagement | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Powertrain.Transmission.DiffLockCenterEngagement | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Powertrain.Transmission.DiffLockFrontEngagement | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Powertrain.Transmission.DiffLockRearEngagement | 20 | 10 | float | 50 | 100 |
+        | Vehicle.Powertrain.Transmission.GearChangeMode | 20 | 10 | string | AUTOMATIC | MANUAL |
+        | Vehicle.Powertrain.Transmission.IsElectricalPowertrainEngaged | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.Transmission.IsLowRangeEngaged | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.Transmission.IsParkLockEngaged | 20 | 10 | bool | false | true |
+        | Vehicle.Powertrain.Transmission.PerformanceMode | 20 | 10 | string | SPORT | NORMAL |
+        | Vehicle.Powertrain.Transmission.SelectedGear | 20 | 10 | int8 | 0 | 127 |
+        | Vehicle.Powertrain.Transmission.TorqueDistribution | 20 | 10 | float | 0 | 100 |
+        
+    @CleanupRestoreServerforSet
+    Scenario Outline: Set requests are failed when the server is stopped
+        When the server is stopped for set
+        Then an attempt to set the actuator signal <path> to <datatype> <checked_value> is failed
+
+    Examples:
+        | path                                                     | datatype      | checked_value       |
+        | Vehicle.Powertrain.FuelSystem.IsFuelPortFlapOpen | bool | true |
+        | Vehicle.Powertrain.IsAutoPowerOptimize | bool | true |
+        | Vehicle.Powertrain.PowerOptimizeLevel | uint8 | 10 |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargeLimit | uint8 | 100 |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsChargingCableLocked | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsFlapOpen | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsChargingCableLocked | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsFlapOpen | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsChargingCableLocked | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsFlapOpen | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsChargingCableLocked | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsFlapOpen | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsChargingCableLocked | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsFlapOpen | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsChargingCableLocked | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsFlapOpen | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsChargingCableLocked | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsFlapOpen | bool | true |
+        | Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging | string | START |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode | string | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Time | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.RequestedMode | string | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.RequestedMode | string | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.RequestedMode | string | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.RequestedMode | string | INACTIVE |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING |
+        | Vehicle.Powertrain.Transmission.ClutchEngagement | float | 100 |
+        | Vehicle.Powertrain.Transmission.DiffLockCenterEngagement | float | 100 |
+        | Vehicle.Powertrain.Transmission.DiffLockFrontEngagement | float | 100 |
+        | Vehicle.Powertrain.Transmission.DiffLockRearEngagement | float | 100 |
+        | Vehicle.Powertrain.Transmission.GearChangeMode | string | MANUAL |
+        | Vehicle.Powertrain.Transmission.IsElectricalPowertrainEngaged | bool | true |
+        | Vehicle.Powertrain.Transmission.IsLowRangeEngaged | bool | true |
+        | Vehicle.Powertrain.Transmission.IsParkLockEngaged | bool | true |
+        | Vehicle.Powertrain.Transmission.PerformanceMode | string | NORMAL |
+        | Vehicle.Powertrain.Transmission.SelectedGear | int8 | 127 |
+        | Vehicle.Powertrain.Transmission.TorqueDistribution | float | 100 |
+        
+
+    @CleanupRestoreNetworkforSet
+    Scenario Outline: Set requests are failed when the network communication failure
+        When network failure of <network_failure> is injected for set
+        Then an attempt to set the actuator signal <path> to <datatype> <checked_value> is failed
+
+    Examples:
+        | path                                                     | datatype      | checked_value       | network_failure       |
+        | Vehicle.Powertrain.FuelSystem.IsFuelPortFlapOpen | bool | true | timeout |
+        | Vehicle.Powertrain.FuelSystem.IsFuelPortFlapOpen | bool | true | reject |
+        | Vehicle.Powertrain.IsAutoPowerOptimize | bool | true | timeout |
+        | Vehicle.Powertrain.IsAutoPowerOptimize | bool | true | reject |
+        | Vehicle.Powertrain.PowerOptimizeLevel | uint8 | 10 | timeout |
+        | Vehicle.Powertrain.PowerOptimizeLevel | uint8 | 10 | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargeLimit | uint8 | 100 | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargeLimit | uint8 | 100 | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsChargingCableLocked | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsChargingCableLocked | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsFlapOpen | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.AnyPosition.IsFlapOpen | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsChargingCableLocked | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsChargingCableLocked | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsFlapOpen | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontLeft.IsFlapOpen | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsChargingCableLocked | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsChargingCableLocked | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsFlapOpen | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontMiddle.IsFlapOpen | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsChargingCableLocked | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsChargingCableLocked | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsFlapOpen | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.FrontRight.IsFlapOpen | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsChargingCableLocked | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsChargingCableLocked | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsFlapOpen | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearLeft.IsFlapOpen | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsChargingCableLocked | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsChargingCableLocked | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsFlapOpen | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearMiddle.IsFlapOpen | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsChargingCableLocked | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsChargingCableLocked | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsFlapOpen | bool | true | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.ChargingPort.RearRight.IsFlapOpen | bool | true | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging | string | START | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.StartStopCharging | string | START | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode | string | INACTIVE | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Mode | string | INACTIVE | reject |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Time | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Powertrain.TractionBattery.Charging.Timer.Time | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.RequestedMode | string | INACTIVE | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.RequestedMode | string | INACTIVE | reject |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number1.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.RequestedMode | string | INACTIVE | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.RequestedMode | string | INACTIVE | reject |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number2.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.RequestedMode | string | INACTIVE | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.RequestedMode | string | INACTIVE | reject |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number3.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.RequestedMode | string | INACTIVE | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.RequestedMode | string | INACTIVE | reject |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.StartTime | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTemperature | float | 3.4028235e+38 | reject |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING | timeout |
+        | Vehicle.Powertrain.TractionBattery.Number4.BatteryConditioning.TargetTime | string | THIS_IS_A_TEST_STRING | reject |
+        | Vehicle.Powertrain.Transmission.ClutchEngagement | float | 100 | timeout |
+        | Vehicle.Powertrain.Transmission.ClutchEngagement | float | 100 | reject |
+        | Vehicle.Powertrain.Transmission.DiffLockCenterEngagement | float | 100 | timeout |
+        | Vehicle.Powertrain.Transmission.DiffLockCenterEngagement | float | 100 | reject |
+        | Vehicle.Powertrain.Transmission.DiffLockFrontEngagement | float | 100 | timeout |
+        | Vehicle.Powertrain.Transmission.DiffLockFrontEngagement | float | 100 | reject |
+        | Vehicle.Powertrain.Transmission.DiffLockRearEngagement | float | 100 | timeout |
+        | Vehicle.Powertrain.Transmission.DiffLockRearEngagement | float | 100 | reject |
+        | Vehicle.Powertrain.Transmission.GearChangeMode | string | MANUAL | timeout |
+        | Vehicle.Powertrain.Transmission.GearChangeMode | string | MANUAL | reject |
+        | Vehicle.Powertrain.Transmission.IsElectricalPowertrainEngaged | bool | true | timeout |
+        | Vehicle.Powertrain.Transmission.IsElectricalPowertrainEngaged | bool | true | reject |
+        | Vehicle.Powertrain.Transmission.IsLowRangeEngaged | bool | true | timeout |
+        | Vehicle.Powertrain.Transmission.IsLowRangeEngaged | bool | true | reject |
+        | Vehicle.Powertrain.Transmission.IsParkLockEngaged | bool | true | timeout |
+        | Vehicle.Powertrain.Transmission.IsParkLockEngaged | bool | true | reject |
+        | Vehicle.Powertrain.Transmission.PerformanceMode | string | NORMAL | timeout |
+        | Vehicle.Powertrain.Transmission.PerformanceMode | string | NORMAL | reject |
+        | Vehicle.Powertrain.Transmission.SelectedGear | int8 | 127 | timeout |
+        | Vehicle.Powertrain.Transmission.SelectedGear | int8 | 127 | reject |
+        | Vehicle.Powertrain.Transmission.TorqueDistribution | float | 100 | timeout |
+        | Vehicle.Powertrain.Transmission.TorqueDistribution | float | 100 | reject |
+        

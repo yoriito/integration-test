@@ -1,0 +1,168 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: UnSubscribe
+
+    Scenario Outline: The unsubscribe request for a signal that is currently subscribed has been successfully processed
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        Then attempts to unsubscribe the signal at <path> of datatype <datatype> is succeeded
+
+    Examples:
+        | path                                                     | datatype  | value_0     |
+        | Vehicle.Acceleration | complex | {"Longitudinal":{"type":"float","value":0.0},"Lateral":{"type":"float","value":0.0},"Vertical":{"type":"float","value":0.0}} |
+        | Vehicle.AngularVelocity | complex | {"Roll":{"type":"float","value":0.0},"Pitch":{"type":"float","value":0.0},"Yaw":{"type":"float","value":0.0}} |
+        | Vehicle.AverageSpeed | float | 0.0 |
+        | Vehicle.CurrentOverallWeight | uint16 | 32767 |
+        | Vehicle.IsAutoPowerOptimize | bool | false |
+        | Vehicle.LowVoltageSystemState | string | LOCK |
+        | Vehicle.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.TraveledDistance | uint32 | 2147483647 |
+        
+
+
+    Scenario Outline: Unsubscribe of one subscription_id does not hinder other subscription_ids
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When attempts to unsubscribe the signal at <path> of datatype <datatype> is succeeded
+        And the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then The other subscription_ids stream returns <datatype> <value_1> on <path>
+
+    Examples:
+        | path                                                     | count         | duplex        | datatype      | value_0       | value_1       |
+        | Vehicle.Acceleration | 2 | 1 | complex | {"Longitudinal":{"type":"float","value":0.0},"Lateral":{"type":"float","value":0.0},"Vertical":{"type":"float","value":0.0}} | {"Longitudinal":{"type":"float","value":3.4028235e+38},"Lateral":{"type":"float","value":3.4028235e+38},"Vertical":{"type":"float","value":3.4028235e+38}} |
+        | Vehicle.AngularVelocity | 2 | 1 | complex | {"Roll":{"type":"float","value":0.0},"Pitch":{"type":"float","value":0.0},"Yaw":{"type":"float","value":0.0}} | {"Roll":{"type":"float","value":3.4028235e+38},"Pitch":{"type":"float","value":3.4028235e+38},"Yaw":{"type":"float","value":3.4028235e+38}} |
+        | Vehicle.AverageSpeed | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.CurrentOverallWeight | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.IsAutoPowerOptimize | 2 | 1 | bool | false | true |
+        | Vehicle.LowVoltageSystemState | 2 | 1 | string | LOCK | UNKNOWN |
+        | Vehicle.PowerOptimizeLevel | 2 | 1 | uint8 | 5 | 10 |
+        | Vehicle.TraveledDistance | 2 | 1 | uint32 | 2147483647 | 4294967295 |
+        
+
+
+    Scenario Outline: Millions of unsubscribe requests do not kill kura server
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        Then HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections with duplex <duplex> are all succeeded
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | value_0       | value_1       |
+        | Vehicle.Acceleration | 100 | 10 | complex | {"Longitudinal":{"type":"float","value":0.0},"Lateral":{"type":"float","value":0.0},"Vertical":{"type":"float","value":0.0}} | {"Longitudinal":{"type":"float","value":3.4028235e+38},"Lateral":{"type":"float","value":3.4028235e+38},"Vertical":{"type":"float","value":3.4028235e+38}} |
+        | Vehicle.AngularVelocity | 100 | 10 | complex | {"Roll":{"type":"float","value":0.0},"Pitch":{"type":"float","value":0.0},"Yaw":{"type":"float","value":0.0}} | {"Roll":{"type":"float","value":3.4028235e+38},"Pitch":{"type":"float","value":3.4028235e+38},"Yaw":{"type":"float","value":3.4028235e+38}} |
+        | Vehicle.AverageSpeed | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.CurrentOverallWeight | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.IsAutoPowerOptimize | 100 | 10 | bool | false | true |
+        | Vehicle.LowVoltageSystemState | 100 | 10 | string | LOCK | UNKNOWN |
+        | Vehicle.PowerOptimizeLevel | 100 | 10 | uint8 | 5 | 10 |
+        | Vehicle.TraveledDistance | 100 | 10 | uint32 | 2147483647 | 4294967295 |
+        
+
+
+    @CleanupRestoreNetwork
+    Scenario Outline: Unsubscribe requests during network failure result in client error
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are failed
+
+    Examples:
+        | path                                          | network_failure | datatype  | value     |
+        | Vehicle.Acceleration | reject  | complex | {"Longitudinal":{"type":"float","value":0.0},"Lateral":{"type":"float","value":0.0},"Vertical":{"type":"float","value":0.0}} |
+        | Vehicle.Acceleration | timeout | complex | {"Longitudinal":{"type":"float","value":0.0},"Lateral":{"type":"float","value":0.0},"Vertical":{"type":"float","value":0.0}} |
+        | Vehicle.AngularVelocity | reject  | complex | {"Roll":{"type":"float","value":0.0},"Pitch":{"type":"float","value":0.0},"Yaw":{"type":"float","value":0.0}} |
+        | Vehicle.AngularVelocity | timeout | complex | {"Roll":{"type":"float","value":0.0},"Pitch":{"type":"float","value":0.0},"Yaw":{"type":"float","value":0.0}} |
+        | Vehicle.AverageSpeed | reject  | float | 0.0 |
+        | Vehicle.AverageSpeed | timeout | float | 0.0 |
+        | Vehicle.CurrentOverallWeight | reject  | uint16 | 32767 |
+        | Vehicle.CurrentOverallWeight | timeout | uint16 | 32767 |
+        | Vehicle.IsAutoPowerOptimize | reject  | bool | false |
+        | Vehicle.IsAutoPowerOptimize | timeout | bool | false |
+        | Vehicle.LowVoltageSystemState | reject  | string | LOCK |
+        | Vehicle.LowVoltageSystemState | timeout | string | LOCK |
+        | Vehicle.PowerOptimizeLevel | reject  | uint8 | 5 |
+        | Vehicle.PowerOptimizeLevel | timeout | uint8 | 5 |
+        | Vehicle.TraveledDistance | reject  | uint32 | 2147483647 |
+        | Vehicle.TraveledDistance | timeout | uint32 | 2147483647 |
+        
+
+
+    Scenario Outline: Unsubscribe requests after recovery from network failure are succeeded
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        And network is restored from the failure
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are succeeded
+
+    Examples:
+        | path                                          | network_failure | datatype  | value     |
+        | Vehicle.Acceleration | reject  | complex | {"Longitudinal":{"type":"float","value":0.0},"Lateral":{"type":"float","value":0.0},"Vertical":{"type":"float","value":0.0}} |
+        | Vehicle.Acceleration | timeout | complex | {"Longitudinal":{"type":"float","value":0.0},"Lateral":{"type":"float","value":0.0},"Vertical":{"type":"float","value":0.0}} |
+        | Vehicle.AngularVelocity | reject  | complex | {"Roll":{"type":"float","value":0.0},"Pitch":{"type":"float","value":0.0},"Yaw":{"type":"float","value":0.0}} |
+        | Vehicle.AngularVelocity | timeout | complex | {"Roll":{"type":"float","value":0.0},"Pitch":{"type":"float","value":0.0},"Yaw":{"type":"float","value":0.0}} |
+        | Vehicle.AverageSpeed | reject  | float | 0.0 |
+        | Vehicle.AverageSpeed | timeout | float | 0.0 |
+        | Vehicle.CurrentOverallWeight | reject  | uint16 | 32767 |
+        | Vehicle.CurrentOverallWeight | timeout | uint16 | 32767 |
+        | Vehicle.IsAutoPowerOptimize | reject  | bool | false |
+        | Vehicle.IsAutoPowerOptimize | timeout | bool | false |
+        | Vehicle.LowVoltageSystemState | reject  | string | LOCK |
+        | Vehicle.LowVoltageSystemState | timeout | string | LOCK |
+        | Vehicle.PowerOptimizeLevel | reject  | uint8 | 5 |
+        | Vehicle.PowerOptimizeLevel | timeout | uint8 | 5 |
+        | Vehicle.TraveledDistance | reject  | uint32 | 2147483647 |
+        | Vehicle.TraveledDistance | timeout | uint32 | 2147483647 |
+        
+
+
+    @CleanupRestoreServer
+    Scenario Outline: Unsubscribe requests during server down result in client error
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When the server is stopped
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are failed
+
+    Examples:
+        | path                                          | datatype  | value   |
+        | Vehicle.Acceleration | complex | {"Longitudinal":{"type":"float","value":0.0},"Lateral":{"type":"float","value":0.0},"Vertical":{"type":"float","value":0.0}} |
+        | Vehicle.AngularVelocity | complex | {"Roll":{"type":"float","value":0.0},"Pitch":{"type":"float","value":0.0},"Yaw":{"type":"float","value":0.0}} |
+        | Vehicle.AverageSpeed | float | 0.0 |
+        | Vehicle.CurrentOverallWeight | uint16 | 32767 |
+        | Vehicle.IsAutoPowerOptimize | bool | false |
+        | Vehicle.LowVoltageSystemState | string | LOCK |
+        | Vehicle.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.TraveledDistance | uint32 | 2147483647 |
+        
+
+
+    @CleanupRestoreServer
+    Scenario Outline: Unsubscribe requests after server reset are succeeded
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When the server is reset
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are succeeded
+
+    Examples:
+        | path                                          | datatype  | value   |
+        | Vehicle.Acceleration | complex | {"Longitudinal":{"type":"float","value":0.0},"Lateral":{"type":"float","value":0.0},"Vertical":{"type":"float","value":0.0}} |
+        | Vehicle.AngularVelocity | complex | {"Roll":{"type":"float","value":0.0},"Pitch":{"type":"float","value":0.0},"Yaw":{"type":"float","value":0.0}} |
+        | Vehicle.AverageSpeed | float | 0.0 |
+        | Vehicle.CurrentOverallWeight | uint16 | 32767 |
+        | Vehicle.IsAutoPowerOptimize | bool | false |
+        | Vehicle.LowVoltageSystemState | string | LOCK |
+        | Vehicle.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.TraveledDistance | uint32 | 2147483647 |
+        
+
