@@ -1,0 +1,253 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Build and Test on devcontainer(desktop environment)
+
+on:
+  schedule:
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+    inputs:
+      devcontainer-tag:
+        description: 'Image tag.'
+        required: false
+        default: 'latest'
+        type: string
+      run-full-tests:
+        description: 'Use full feature files in test run'
+        required: false
+        default: false
+        type: boolean
+  workflow_call:
+    inputs:
+      run-full-tests:
+        description: 'Use full feature files in test run'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  prepare:
+    name: Prepare domain list
+    runs-on: LargeSizeRunner
+    outputs:
+      params: ${{ steps.parse.outputs.params }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Parse domain list from feature files
+        id: parse
+        run: |
+          params=$(find features/domains -name '*.feature_*' \
+            | sed 's/.*\.feature_//' \
+            | sort -u \
+            | jq -Rsc 'split("\n") | map(select(length > 0))')
+          echo "params=${params}" >> "$GITHUB_OUTPUT"
+          echo "::group::Detected domains"
+          echo "${params}" | jq -r '.[]'
+          echo "::endgroup::"
+
+  build:
+    needs: prepare
+    name: Build and Test
+    runs-on: LargeSizeRunner
+    timeout-minutes: 360
+    env:
+      DEVCONTAINER_TAG: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs['devcontainer-tag'] || 'latest' }}
+    strategy:
+      matrix:
+        param: ${{fromJson(needs.prepare.outputs.params)}}
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: docker login
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Start Docker Container
+      run: |
+        IMAGE="${{ vars.DEVCONTAINER_IMAGE }}:${DEVCONTAINER_TAG}"
+        echo "Using devcontainer image: ${IMAGE}"
+        docker container run -d \
+          --name builder \
+          -v "${{ github.workspace }}:/work" \
+          -w /work \
+          --entrypoint /init \
+          --cap-add NET_ADMIN \
+          "${IMAGE}"
+
+        echo "Waiting for s6 services to start..."
+        for i in $(seq 1 ${{ vars.SERVICE_WAIT_SEC }}); do
+          if docker exec builder grep -q "0100007F:${{ vars.LISTEN_PORT_HEX }}" /proc/net/tcp 2>/dev/null; then
+            echo "Services ready (attempt ${i})"
+            break
+          fi
+          sleep 1
+        done
+        if ! docker exec builder grep -q "0100007F:${{ vars.LISTEN_PORT_HEX }}" /proc/net/tcp 2>/dev/null; then
+          echo "ERROR: Services not ready after ${{ vars.SERVICE_WAIT_SEC }}s"
+          docker exec builder /bin/bash -lc '/command/s6-rc -a list' 2>/dev/null || true
+          exit 1
+        fi
+
+    - name: Configure
+      run: |
+        docker exec builder /bin/bash -lc '
+            set -euo pipefail
+            upper_domain="$(echo "${{ matrix.param }}" | tr '[:lower:]' '[:upper:]')"
+            cmake -S /work -B /work/build -D ENABLE_$upper_domain=ON
+          '
+
+    - name: Build
+      run: |
+        docker exec builder /bin/bash -lc '
+            set -euo pipefail
+            cmake --build /work/build -j$(nproc)
+          '
+
+    - name: Integration Test
+      env:
+        RUN_FULL_TESTS: ${{ inputs.run-full-tests && 'true' || 'false' }}
+        TEST_TIMEOUT: ${{ inputs.run-full-tests && '360m' || '15m' }}
+      run: |
+        docker exec -e RUN_FULL_TESTS="${RUN_FULL_TESTS}" -e TEST_TIMEOUT="${TEST_TIMEOUT}" builder /bin/bash -lc '
+            set -euo pipefail
+
+            cd /work
+            mkdir -p /work/junit_integration
+            lower_domain="$(echo "${{ matrix.param }}" | tr '[:upper:]' '[:lower:]')"
+            domain_dir="features/domains/$lower_domain/"
+            domain="$(basename "${domain_dir}")"
+            server_bin="/work/build/features/domains/${domain}/test_integration_${domain}"
+
+            if [ ! -x "${server_bin}" ]; then
+              echo "=== Skip ${domain} (server binary not built) ==="
+              continue
+            fi
+
+            shopt -s nullglob
+            features_all=( "${domain_dir}"*.feature_* )
+            features=()
+            for f in "${features_all[@]}"; do
+              if [ "${RUN_FULL_TESTS}" = "true" ]; then
+                [[ "$f" != *full* ]] && continue
+              else
+                [[ "$f" == *full* ]] && continue
+              fi
+              features+=("$f")
+            done
+            shopt -u nullglob
+            if [ ${#features[@]} -eq 0 ]; then
+              echo "=== Skip ${domain} (no feature files) ==="
+              continue
+            fi
+
+            for feature in "${features[@]}"; do
+              echo "=== Starting server for ${feature} ==="
+              "${server_bin}" 2>&1 &
+              server_pid=$!
+
+              echo "Waiting for wire server on :3902..."
+              for i in $(seq 1 30); do
+                if grep -q "0100007F:0F3E" /proc/net/tcp 2>/dev/null; then
+                  echo "Wire server ready (attempt ${i})"
+                  break
+                fi
+                if ! kill -0 "${server_pid}" 2>/dev/null; then
+                  echo "ERROR: Server process died for ${feature}"
+                  exit 1
+                fi
+                sleep 1
+              done
+              if ! grep -q "0100007F:0F3E" /proc/net/tcp 2>/dev/null; then
+                echo "ERROR: Wire server not listening after 30s for ${feature}"
+                exit 1
+              fi
+
+              echo "=== Running ${feature} ==="
+              timeout "${TEST_TIMEOUT}" cucumber --format progress --format junit --out /work/junit_integration/ --publish-quiet "${feature}"
+
+              kill "${server_pid}" 2>/dev/null || true
+              wait "${server_pid}" 2>/dev/null || true
+              sleep 2
+            done
+          '
+
+    - name: Stop Docker Container
+      if: always()
+      run: |
+        docker rm -f builder
+
+    - name: Install junit2html
+      if: always()
+      run: python3 -m pip install junit2html --quiet
+
+    - name: Generate Integration Test HTML Report
+      if: always() && hashFiles('junit_integration/*.xml') != ''
+      run: |
+        junit2html junit_integration --merge /tmp/merged-integration.xml
+        junit2html /tmp/merged-integration.xml "integration-test-report-${{ matrix.param }}.html"
+
+    - name: Upload Integration Test Report
+      if: always() && hashFiles('integration-test-report-*.html') != ''
+      uses: actions/upload-artifact@v6
+      with:
+        name: integration-test-results-${{ matrix.param }}
+        path: |
+          junit_integration/
+          integration-test-report-${{ matrix.param }}.html
+        retention-days: 1
+
+  merge-reports:
+    name: Merge Integration Test Reports
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all test results
+        uses: actions/download-artifact@v6
+        with:
+          pattern: integration-test-results-*
+          path: all-results
+
+      - name: Install junit2html
+        run: python3 -m pip install junit2html --quiet
+
+      - name: Merge all reports
+        run: |
+          mkdir -p merged/junit_integration
+          find all-results -name 'integration-test-report-*.html' -exec cp {} merged/ \;
+          find all-results -name '*.xml' -path '*/junit_integration/*' -exec cp {} merged/junit_integration/ \;
+          if ls merged/junit_integration/*.xml 1>/dev/null 2>&1; then
+            junit2html merged/junit_integration --merge /tmp/merged-all.xml
+            junit2html /tmp/merged-all.xml merged/integration-test-report.html
+          fi
+
+      - name: Upload merged results
+        uses: actions/upload-artifact@v6
+        with:
+          name: integration-test-results
+          path: merged/
+          retention-days: 7
+
+      - name: Delete each domain artifacts
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts" \
+            --paginate -q '.artifacts[] | select(.name | startswith("integration-test-results-")) | .id' \
+          | while read -r id; do
+            gh api -X DELETE "repos/${{ github.repository }}/actions/artifacts/${id}" || true
+          done

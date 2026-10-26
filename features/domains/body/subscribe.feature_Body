@@ -1,0 +1,201 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: Subscribe
+
+    Scenario Outline: HeadlessApp_Subscribe_Sensor_Value
+        Given PAL set sensor signal <path> to <datatype> <value>
+        Given HeadlessApp subscribe the sensor signal <path> of <datatype>
+        Then PAL set the signal at <path> of <datatype> to <values> by order, subscribe stream receive the same data
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                         | datatype  | value            | values            |
+        | Vehicle.Body.Hood.IsLocked | bool | false | ["true","false"] |
+        | Vehicle.Body.Hood.Position | uint8 | 50 | ["100","50","0"] |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE | ["INACTIVE","ACTIVE","ADAPTIVE"] |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 | ["100","0","-100"] |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 | ["100","50","0"] |
+        
+    Scenario Outline: Notification of subscribed signals
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Body.Hood.IsLocked | bool | false | true |
+        | Vehicle.Body.Hood.Position | uint8 | 50 | 100 |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 | 100 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 | 100 |
+        
+    Scenario Outline: Notification is delivered even if the signal is unavailable as sensor
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> as unavailable
+        Then the subscribe stream returns <datatype> <value_1> on <path> as unavailable as sensor
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Body.Hood.IsLocked | bool | false | true |
+        | Vehicle.Body.Hood.Position | uint8 | 50 | 100 |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 | 100 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 | 100 |
+        
+    Scenario Outline: Notification carries IsAvailableActuator as true when reported by the producer
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> as available actuator
+        Then the subscription stream returns available actuator on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Body.Hood.IsLocked | bool | false | true |
+        | Vehicle.Body.Hood.Position | uint8 | 50 | 100 |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 | 100 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 | 100 |
+        
+    Scenario Outline: Notification carries a produced timestamp when the producer attaches one
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> with a produced timestamp
+        Then the subscribe stream returns a produced timestamp on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Body.Hood.IsLocked | bool | false | true |
+        | Vehicle.Body.Hood.Position | uint8 | 50 | 100 |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 | 100 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 | 100 |
+        
+    Scenario Outline: Multiple subscriptions to a signal
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count         | duplex        | datatype      | value_0       | value_1       |
+        | Vehicle.Body.Hood.IsLocked | 2 | 1 | bool | false | true |
+        | Vehicle.Body.Hood.Position | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Body.Lights.Brake.IsActive | 2 | 1 | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | 2 | 1 | int8 | 0 | 100 |
+        | Vehicle.Body.RearMainSpoilerPosition | 2 | 1 | float | 50 | 100 |
+        
+    Scenario Outline: Notification issued even if signal value being changed
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>, which is equal to the current value
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Body.Hood.IsLocked | bool | false | true |
+        | Vehicle.Body.Hood.Position | uint8 | 50 | 100 |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 | 100 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 | 100 |
+        
+    Scenario Outline: Millions of subscribe requests do not kill kura server & subscription_ids are correctly returned
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | value_0       | value_1       |
+        | Vehicle.Body.Hood.IsLocked | 100 | 10 | bool | false | true |
+        | Vehicle.Body.Hood.Position | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Body.Lights.Brake.IsActive | 100 | 10 | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | 100 | 10 | int8 | 0 | 100 |
+        | Vehicle.Body.RearMainSpoilerPosition | 100 | 10 | float | 50 | 100 |
+        
+    @CleanupRestoreServer
+    Scenario Outline: Subscribe requests are failed when the server is stopped
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When the server is stopped
+        Then an attempt to subscribe the signal at <path> of datatype <datatype> is failed
+
+    Examples:
+        | path                                                     | datatype      | value_0       |
+        | Vehicle.Body.Hood.IsLocked | bool | false |
+        | Vehicle.Body.Hood.Position | uint8 | 50 |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 |
+        
+    @CleanupRestoreNetwork
+    Scenario Outline: Subscribe requests are failed when the network communication failure
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        Then an attempt to subscribe the signal at <path> of datatype <datatype> is failed
+
+    Examples:
+        | path                                                     | datatype      | value_0       | network_failure       |
+        | Vehicle.Body.Hood.IsLocked | bool | false | timeout |
+        | Vehicle.Body.Hood.IsLocked | bool | false | reject  |
+        | Vehicle.Body.Hood.Position | uint8 | 50 | timeout |
+        | Vehicle.Body.Hood.Position | uint8 | 50 | reject  |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE | timeout |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE | reject  |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 | timeout |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 | reject  |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 | timeout |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 | reject  |
+        
+    Scenario Outline: Subscribe contexts are no longer available after the server is reset
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the server is reset
+        And the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream for the signal <path> returns no data
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Body.Hood.IsLocked | bool | false | true |
+        | Vehicle.Body.Hood.Position | uint8 | 50 | 100 |
+        | Vehicle.Body.Lights.Brake.IsActive | string | ACTIVE | INACTIVE |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | int8 | 0 | 100 |
+        | Vehicle.Body.RearMainSpoilerPosition | float | 50 | 100 |
+        
+    Scenario Outline: All updates are notified to subscriptions without any drops even large burden on server or network
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the signal at <path> of numeric datatype <datatype> is updated <count> times, any updates are captured from subscribe stream
+        Then HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count            | datatype      | value_0       |
+        | Vehicle.Body.Hood.Position | 10 | uint8 | 50 |
+        | Vehicle.Body.Mirrors.DriverSide.Tilt | 10 | int8 | 0 |
+        | Vehicle.Body.RearMainSpoilerPosition | 10 | float | 50 |
+        

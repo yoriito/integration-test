@@ -1,0 +1,210 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: Signal API set
+
+    @coldstart @serial
+    Scenario Outline: Cold start once and seed initial actuator values
+        Given Kura service is cleanly restarted
+        When HeadlessApp sets the following actuator signals
+        | path                                                     | datatype | value         |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false |
+        
+        Then PAL should report the following actuator signals
+        | path                                                     | datatype | value         |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false |
+        
+    @warm @serial
+    Scenario Outline: Overwrite/confirm after cold start (no restart)
+        Given Set the actuator signal <path> to <datatype> <default_value>
+        When HeadlessApp set the actuator signal <path> to <datatype> <checked_value>
+        Then the result obtained from the actuator signal by PAL should be <datatype> <checked_value> on <path>
+
+    Examples:
+        | path                                                     | datatype | default_value | checked_value |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false | true |
+        
+    Scenario Outline: Millions of set requests do not kill kura server & values remain consistent
+        When HeadlessApp set the signal <path> to <datatype> <checked_value> <count> times with duplex <duplex>
+        Then the result obtained from the actuator signal by PAL should be <datatype> <checked_value> on <path>
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | default_value | checked_value |
+        | Vehicle.ADAS.ABS.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | 20 | 10 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | 20 | 10 | string | INTVL_2 | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.IsActive | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | 20 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.IsAutoPowerOptimize | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | 20 | 10 | bool | false | true |
+        | Vehicle.ADAS.PowerOptimizeLevel | 20 | 10 | uint8 | 5 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | 20 | 10 | bool | false | true |
+        
+    @CleanupRestoreServerforSet
+    Scenario Outline: Set requests are failed when the server is stopped
+        When the server is stopped for set
+        Then an attempt to set the actuator signal <path> to <datatype> <checked_value> is failed
+
+    Examples:
+        | path                                                     | datatype      | checked_value       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | true |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | true |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | true |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | true |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | true |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | true |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | true |
+        
+
+    @CleanupRestoreNetworkforSet
+    Scenario Outline: Set requests are failed when the network communication failure
+        When network failure of <network_failure> is injected for set
+        Then an attempt to set the actuator signal <path> to <datatype> <checked_value> is failed
+
+    Examples:
+        | path                                                     | datatype      | checked_value       | network_failure       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 3.4028235e+38 | timeout |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 3.4028235e+38 | reject |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_1 | timeout |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_1 | reject |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | true | timeout |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | true | reject |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | true | timeout |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | true | reject |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 3.4028235e+38 | timeout |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 3.4028235e+38 | reject |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | true | timeout |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | true | reject |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | true | reject |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 10 | timeout |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 10 | reject |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | true | timeout |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | true | reject |
+        

@@ -1,0 +1,921 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: Subscribe
+
+    Scenario Outline: HeadlessApp_Subscribe_Sensor_Value
+        Given PAL set sensor signal <path> to <datatype> <value>
+        Given HeadlessApp subscribe the sensor signal <path> of <datatype>
+        Then PAL set the signal at <path> of <datatype> to <values> by order, subscribe stream receive the same data
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                         | datatype  | value            | values            |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ABS.IsEngaged | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | ["SAE_0","SAE_1","SAE_2_DISENGAGING"] |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | ["3.4028235e+38","1.70141175e+38","0.0"] |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 | ["INTVL_1","INTVL_2","INTVL_3"] |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | string | CONTAMINATION | ["NO_DEGRADATION","CONTAMINATION","OTHER"] |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false | ["true","false"] |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false | ["true","false"] |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 | ["3.4028235e+38","0.0","-3.4028235e+38"] |
+        | Vehicle.ADAS.DMS.DegradationStatus | string | CAMERA_LENS_CONTAMINATION | ["NO_DEGRADATION","CAMERA_LENS_CONTAMINATION","OTHER"] |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.DMS.IsWarning | bool | false | ["true","false"] |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.EBA.IsEngaged | bool | false | ["true","false"] |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.EBD.IsEngaged | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ESC.IsEngaged | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | ["{\"MostProbable\":{\"type\":\"float\",\"value\":100},\"LowerBound\":{\"type\":\"float\",\"value\":100},\"UpperBound\":{\"type\":\"float\",\"value\":100}}","{\"MostProbable\":{\"type\":\"float\",\"value\":50},\"LowerBound\":{\"type\":\"float\",\"value\":50},\"UpperBound\":{\"type\":\"float\",\"value\":50}}","{\"MostProbable\":{\"type\":\"float\",\"value\":0},\"LowerBound\":{\"type\":\"float\",\"value\":0},\"UpperBound\":{\"type\":\"float\",\"value\":0}}"] |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false | ["true","false"] |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | string | CAMERA_OBSTRUCTION_DETECTED | ["NO_DEGRADATION","CAMERA_OBSTRUCTION_DETECTED","ENV_CONDITION_BAD"] |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | string | SENSOR_BLOCKED | ["NO_DEGRADATION","SENSOR_BLOCKED","CALIBRATION_ERROR"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | float | 1.70141175e+38 | ["3.4028235e+38","1.70141175e+38","-1.0"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | ["2147483647","0","-2147483648"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | string | CROSS_TRAFFIC | ["UNDEFINED","CROSS_TRAFFIC","BLIND_SPOT"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | string | SENSOR_BLOCKED | ["NO_DEGRADATION","SENSOR_BLOCKED","CALIBRATION_ERROR"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | float | 1.70141175e+38 | ["3.4028235e+38","1.70141175e+38","-1.0"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | int32 | 0 | ["2147483647","0","-2147483648"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | string | CROSS_TRAFFIC | ["UNDEFINED","CROSS_TRAFFIC","BLIND_SPOT"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | string | SENSOR_BLOCKED | ["NO_DEGRADATION","SENSOR_BLOCKED","CALIBRATION_ERROR"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | float | 1.70141175e+38 | ["3.4028235e+38","1.70141175e+38","-1.0"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | int32 | 0 | ["2147483647","0","-2147483648"] |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | string | CROSS_TRAFFIC | ["UNDEFINED","CROSS_TRAFFIC","BLIND_SPOT"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | string | SENSOR_BLOCKED | ["NO_DEGRADATION","SENSOR_BLOCKED","CALIBRATION_ERROR"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | float | 1.70141175e+38 | ["3.4028235e+38","1.70141175e+38","-1.0"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | int32 | 0 | ["2147483647","0","-2147483648"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | string | CROSS_TRAFFIC | ["UNDEFINED","CROSS_TRAFFIC","BLIND_SPOT"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | string | SENSOR_BLOCKED | ["NO_DEGRADATION","SENSOR_BLOCKED","CALIBRATION_ERROR"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | float | 1.70141175e+38 | ["3.4028235e+38","1.70141175e+38","-1.0"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | int32 | 0 | ["2147483647","0","-2147483648"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | string | CROSS_TRAFFIC | ["UNDEFINED","CROSS_TRAFFIC","BLIND_SPOT"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | string | SENSOR_BLOCKED | ["NO_DEGRADATION","SENSOR_BLOCKED","CALIBRATION_ERROR"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | float | 1.70141175e+38 | ["3.4028235e+38","1.70141175e+38","-1.0"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | bool | false | ["true","false"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | int32 | 0 | ["2147483647","0","-2147483648"] |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | string | CROSS_TRAFFIC | ["UNDEFINED","CROSS_TRAFFIC","BLIND_SPOT"] |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | ["10","5","0"] |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false | ["true","false"] |
+        | Vehicle.ADAS.TCS.IsEngaged | bool | false | ["true","false"] |
+        
+    Scenario Outline: Notification of subscribed signals
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ABS.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | string | CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.DegradationStatus | string | CAMERA_LENS_CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.DMS.IsWarning | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | bool | false | true |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | string | CAMERA_OBSTRUCTION_DETECTED | NO_DEGRADATION |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.TCS.IsEngaged | bool | false | true |
+        
+    Scenario Outline: Notification is delivered even if the signal is unavailable as sensor
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> as unavailable
+        Then the subscribe stream returns <datatype> <value_1> on <path> as unavailable as sensor
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ABS.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | string | CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.DegradationStatus | string | CAMERA_LENS_CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.DMS.IsWarning | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | bool | false | true |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | string | CAMERA_OBSTRUCTION_DETECTED | NO_DEGRADATION |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.TCS.IsEngaged | bool | false | true |
+        
+    Scenario Outline: Notification carries IsAvailableActuator as true when reported by the producer
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> as available actuator
+        Then the subscription stream returns available actuator on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ABS.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | string | CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.DegradationStatus | string | CAMERA_LENS_CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.DMS.IsWarning | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | bool | false | true |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | string | CAMERA_OBSTRUCTION_DETECTED | NO_DEGRADATION |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.TCS.IsEngaged | bool | false | true |
+        
+    Scenario Outline: Notification carries a produced timestamp when the producer attaches one
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> with a produced timestamp
+        Then the subscribe stream returns a produced timestamp on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ABS.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | string | CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.DegradationStatus | string | CAMERA_LENS_CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.DMS.IsWarning | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | bool | false | true |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | string | CAMERA_OBSTRUCTION_DETECTED | NO_DEGRADATION |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.TCS.IsEngaged | bool | false | true |
+        
+    Scenario Outline: Multiple subscriptions to a signal
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count         | duplex        | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ABS.IsEngaged | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | 2 | 1 | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | 2 | 1 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | 2 | 1 | string | INTVL_2 | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | 2 | 1 | string | CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.CruiseControl.IsActive | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.DegradationStatus | 2 | 1 | string | CAMERA_LENS_CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.DMS.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.DMS.IsWarning | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEngaged | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEngaged | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEngaged | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ESC.RoadFriction | 2 | 1 | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.IsAutoPowerOptimize | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | 2 | 1 | string | CAMERA_OBSTRUCTION_DETECTED | NO_DEGRADATION |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | 2 | 1 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | 2 | 1 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | 2 | 1 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | 2 | 1 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | 2 | 1 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | 2 | 1 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | 2 | 1 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | 2 | 1 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | 2 | 1 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | 2 | 1 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | 2 | 1 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | 2 | 1 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | 2 | 1 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | 2 | 1 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | 2 | 1 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | 2 | 1 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | 2 | 1 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | 2 | 1 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | 2 | 1 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | 2 | 1 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | 2 | 1 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | 2 | 1 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | 2 | 1 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | 2 | 1 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.PowerOptimizeLevel | 2 | 1 | uint8 | 5 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.ADAS.TCS.IsEngaged | 2 | 1 | bool | false | true |
+        
+    Scenario Outline: Notification issued even if signal value being changed
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>, which is equal to the current value
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ABS.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | string | CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.DegradationStatus | string | CAMERA_LENS_CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.DMS.IsWarning | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | bool | false | true |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | string | CAMERA_OBSTRUCTION_DETECTED | NO_DEGRADATION |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.TCS.IsEngaged | bool | false | true |
+        
+    Scenario Outline: Millions of subscribe requests do not kill kura server & subscription_ids are correctly returned
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ABS.IsEngaged | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | 100 | 10 | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | 100 | 10 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | 100 | 10 | string | INTVL_2 | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | 100 | 10 | string | CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.CruiseControl.IsActive | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.DegradationStatus | 100 | 10 | string | CAMERA_LENS_CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.DMS.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.DMS.IsWarning | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEngaged | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEngaged | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEngaged | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ESC.RoadFriction | 100 | 10 | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.IsAutoPowerOptimize | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | 100 | 10 | string | CAMERA_OBSTRUCTION_DETECTED | NO_DEGRADATION |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | 100 | 10 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | 100 | 10 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | 100 | 10 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | 100 | 10 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | 100 | 10 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | 100 | 10 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | 100 | 10 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | 100 | 10 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | 100 | 10 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | 100 | 10 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | 100 | 10 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | 100 | 10 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | 100 | 10 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | 100 | 10 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | 100 | 10 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | 100 | 10 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | 100 | 10 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | 100 | 10 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | 100 | 10 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | 100 | 10 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | 100 | 10 | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | 100 | 10 | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | 100 | 10 | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | 100 | 10 | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.PowerOptimizeLevel | 100 | 10 | uint8 | 5 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.ADAS.TCS.IsEngaged | 100 | 10 | bool | false | true |
+        
+    @CleanupRestoreServer
+    Scenario Outline: Subscribe requests are failed when the server is stopped
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When the server is stopped
+        Then an attempt to subscribe the signal at <path> of datatype <datatype> is failed
+
+    Examples:
+        | path                                                     | datatype      | value_0       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false |
+        | Vehicle.ADAS.ABS.IsEngaged | bool | false |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | string | CONTAMINATION |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 |
+        | Vehicle.ADAS.DMS.DegradationStatus | string | CAMERA_LENS_CONTAMINATION |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false |
+        | Vehicle.ADAS.DMS.IsWarning | bool | false |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false |
+        | Vehicle.ADAS.EBA.IsEngaged | bool | false |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false |
+        | Vehicle.ADAS.EBD.IsEngaged | bool | false |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false |
+        | Vehicle.ADAS.ESC.IsEngaged | bool | false |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | bool | false |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | string | CAMERA_OBSTRUCTION_DETECTED |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | string | SENSOR_BLOCKED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | string | CROSS_TRAFFIC |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | string | SENSOR_BLOCKED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | string | CROSS_TRAFFIC |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | string | SENSOR_BLOCKED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | string | CROSS_TRAFFIC |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | string | SENSOR_BLOCKED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | string | CROSS_TRAFFIC |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | string | SENSOR_BLOCKED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | string | CROSS_TRAFFIC |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | string | SENSOR_BLOCKED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | bool | false |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | string | CROSS_TRAFFIC |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false |
+        | Vehicle.ADAS.TCS.IsEngaged | bool | false |
+        
+    @CleanupRestoreNetwork
+    Scenario Outline: Subscribe requests are failed when the network communication failure
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        Then an attempt to subscribe the signal at <path> of datatype <datatype> is failed
+
+    Examples:
+        | path                                                     | datatype      | value_0       | network_failure       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.ABS.IsEngaged | bool | false | timeout |
+        | Vehicle.ADAS.ABS.IsEngaged | bool | false | reject  |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | timeout |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | reject  |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | timeout |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | reject  |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 | timeout |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 | reject  |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | string | CONTAMINATION | timeout |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | string | CONTAMINATION | reject  |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false | timeout |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false | reject  |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false | timeout |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false | reject  |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 | timeout |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 | reject  |
+        | Vehicle.ADAS.DMS.DegradationStatus | string | CAMERA_LENS_CONTAMINATION | timeout |
+        | Vehicle.ADAS.DMS.DegradationStatus | string | CAMERA_LENS_CONTAMINATION | reject  |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.DMS.IsWarning | bool | false | timeout |
+        | Vehicle.ADAS.DMS.IsWarning | bool | false | reject  |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.EBA.IsEngaged | bool | false | timeout |
+        | Vehicle.ADAS.EBA.IsEngaged | bool | false | reject  |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.EBD.IsEngaged | bool | false | timeout |
+        | Vehicle.ADAS.EBD.IsEngaged | bool | false | reject  |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.ESC.IsEngaged | bool | false | timeout |
+        | Vehicle.ADAS.ESC.IsEngaged | bool | false | reject  |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | bool | false | timeout |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | bool | false | reject  |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | timeout |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | reject  |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false | timeout |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false | reject  |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | string | CAMERA_OBSTRUCTION_DETECTED | timeout |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | string | CAMERA_OBSTRUCTION_DETECTED | reject  |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | bool | false | timeout |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | string | SENSOR_BLOCKED | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | string | SENSOR_BLOCKED | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | float | 1.70141175e+38 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | float | 1.70141175e+38 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | string | CROSS_TRAFFIC | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | string | CROSS_TRAFFIC | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | string | SENSOR_BLOCKED | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | string | SENSOR_BLOCKED | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | float | 1.70141175e+38 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | float | 1.70141175e+38 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | int32 | 0 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | int32 | 0 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | string | CROSS_TRAFFIC | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | string | CROSS_TRAFFIC | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | string | SENSOR_BLOCKED | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | string | SENSOR_BLOCKED | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | float | 1.70141175e+38 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | float | 1.70141175e+38 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | int32 | 0 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | int32 | 0 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | string | CROSS_TRAFFIC | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | string | CROSS_TRAFFIC | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | string | SENSOR_BLOCKED | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | string | SENSOR_BLOCKED | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | float | 1.70141175e+38 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | float | 1.70141175e+38 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | int32 | 0 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | int32 | 0 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | string | CROSS_TRAFFIC | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | string | CROSS_TRAFFIC | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | string | SENSOR_BLOCKED | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | string | SENSOR_BLOCKED | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | float | 1.70141175e+38 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | float | 1.70141175e+38 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | int32 | 0 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | int32 | 0 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | string | CROSS_TRAFFIC | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | string | CROSS_TRAFFIC | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | string | SENSOR_BLOCKED | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | string | SENSOR_BLOCKED | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | float | 1.70141175e+38 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | float | 1.70141175e+38 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | bool | false | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | bool | false | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | int32 | 0 | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | int32 | 0 | reject  |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | string | CROSS_TRAFFIC | timeout |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | string | CROSS_TRAFFIC | reject  |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | timeout |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | reject  |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false | timeout |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false | reject  |
+        | Vehicle.ADAS.TCS.IsEngaged | bool | false | timeout |
+        | Vehicle.ADAS.TCS.IsEngaged | bool | false | reject  |
+        
+    Scenario Outline: Subscribe contexts are no longer available after the server is reset
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the server is reset
+        And the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream for the signal <path> returns no data
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.ADAS.ABS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ABS.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ActiveAutonomyLevel | string | SAE_1 | SAE_0 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.CruiseControl.AdaptiveIntervalSet | string | INTVL_2 | INTVL_1 |
+        | Vehicle.ADAS.CruiseControl.DegradationStatus | string | CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.CruiseControl.IsActive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsAdaptive | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.ADAS.DMS.DegradationStatus | string | CAMERA_LENS_CONTAMINATION | NO_DEGRADATION |
+        | Vehicle.ADAS.DMS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.DMS.IsWarning | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBA.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.EBD.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ESC.IsEngaged | bool | false | true |
+        | Vehicle.ADAS.ESC.IsStrongCrossWindDetected | bool | false | true |
+        | Vehicle.ADAS.ESC.RoadFriction | complex | {"MostProbable":{"type":"float","value":50},"LowerBound":{"type":"float","value":50},"UpperBound":{"type":"float","value":50}} | {"MostProbable":{"type":"float","value":100},"LowerBound":{"type":"float","value":100},"UpperBound":{"type":"float","value":100}} |
+        | Vehicle.ADAS.IsAutoPowerOptimize | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.DegradationStatus | string | CAMERA_OBSTRUCTION_DETECTED | NO_DEGRADATION |
+        | Vehicle.ADAS.LaneDepartureDetection.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.LaneDepartureDetection.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.DegradationStatus | string | SENSOR_BLOCKED | NO_DEGRADATION |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | float | 1.70141175e+38 | 3.4028235e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.IsWarning | bool | false | true |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | int32 | 0 | 2147483647 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.WarningType | string | CROSS_TRAFFIC | UNDEFINED |
+        | Vehicle.ADAS.PowerOptimizeLevel | uint8 | 5 | 10 |
+        | Vehicle.ADAS.TCS.IsEnabled | bool | false | true |
+        | Vehicle.ADAS.TCS.IsEngaged | bool | false | true |
+        
+    Scenario Outline: All updates are notified to subscriptions without any drops even large burden on server or network
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the signal at <path> of numeric datatype <datatype> is updated <count> times, any updates are captured from subscribe stream
+        Then HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count            | datatype      | value_0       |
+        | Vehicle.ADAS.CruiseControl.AdaptiveDistanceSet | 10 | float | 1.70141175e+38 |
+        | Vehicle.ADAS.CruiseControl.SpeedSet | 10 | float | 0.0 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.Distance | 10 | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Center.TimeGap | 10 | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.Distance | 10 | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Left.TimeGap | 10 | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.Distance | 10 | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Front.Right.TimeGap | 10 | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.Distance | 10 | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Center.TimeGap | 10 | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.Distance | 10 | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Left.TimeGap | 10 | int32 | 0 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.Distance | 10 | float | 1.70141175e+38 |
+        | Vehicle.ADAS.ObstacleDetection.Rear.Right.TimeGap | 10 | int32 | 0 |
+        | Vehicle.ADAS.PowerOptimizeLevel | 10 | uint8 | 5 |
+        

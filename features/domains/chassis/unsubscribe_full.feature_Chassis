@@ -1,0 +1,555 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: UnSubscribe
+
+    Scenario Outline: The unsubscribe request for a signal that is currently subscribed has been successfully processed
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        Then attempts to unsubscribe the signal at <path> of datatype <datatype> is succeeded
+
+    Examples:
+        | path                                                     | datatype  | value_0     |
+        | Vehicle.Chassis.Accelerator.PedalPosition | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.SteeringAngle | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.SteeringAngle | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Brake.IsDriverEmergencyBrakingDetected | bool | false |
+        | Vehicle.Chassis.Brake.PedalPosition | uint8 | 50 |
+        | Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled | bool | false |
+        | Vehicle.Chassis.ParkingBrake.IsEngaged | bool | false |
+        | Vehicle.Chassis.SteeringWheel.Angle | int16 | 0 |
+        | Vehicle.Chassis.SteeringWheel.Extension | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Heating | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Tilt | uint8 | 50 |
+        
+
+
+    Scenario Outline: Unsubscribe of one subscription_id does not hinder other subscription_ids
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When attempts to unsubscribe the signal at <path> of datatype <datatype> is succeeded
+        And the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then The other subscription_ids stream returns <datatype> <value_1> on <path>
+
+    Examples:
+        | path                                                     | count         | duplex        | datatype      | value_0       | value_1       |
+        | Vehicle.Chassis.Accelerator.PedalPosition | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row1.SteeringAngle | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.AngularSpeed | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.FluidLevel | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsBrakesWorn | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsFluidLevelLow | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.PadWear | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Speed | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.AirTemperature | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.IsPressureLow | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Pressure | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.RubberTemperature | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.AngularSpeed | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.FluidLevel | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsBrakesWorn | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsFluidLevelLow | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.PadWear | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Speed | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.AirTemperature | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.IsPressureLow | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.Pressure | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.RubberTemperature | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.SteeringAngle | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.AngularSpeed | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.FluidLevel | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsBrakesWorn | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsFluidLevelLow | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.PadWear | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Speed | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.AirTemperature | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.IsPressureLow | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.Pressure | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.RubberTemperature | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.AngularSpeed | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.FluidLevel | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsBrakesWorn | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsFluidLevelLow | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.PadWear | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Speed | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.AirTemperature | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.IsPressureLow | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.Pressure | 2 | 1 | uint16 | 32767 | 65535 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.RubberTemperature | 2 | 1 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Brake.IsDriverEmergencyBrakingDetected | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.Brake.PedalPosition | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.ParkingBrake.IsEngaged | 2 | 1 | bool | false | true |
+        | Vehicle.Chassis.SteeringWheel.Angle | 2 | 1 | int16 | 0 | 32767 |
+        | Vehicle.Chassis.SteeringWheel.Extension | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.SteeringWheel.Heating | 2 | 1 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.SteeringWheel.Tilt | 2 | 1 | uint8 | 50 | 100 |
+        
+
+
+    Scenario Outline: Millions of unsubscribe requests do not kill kura server
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        Then HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections with duplex <duplex> are all succeeded
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | value_0       | value_1       |
+        | Vehicle.Chassis.Accelerator.PedalPosition | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row1.SteeringAngle | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.AngularSpeed | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.FluidLevel | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsBrakesWorn | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsFluidLevelLow | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.PadWear | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Speed | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.AirTemperature | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.IsPressureLow | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Pressure | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.RubberTemperature | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.AngularSpeed | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.FluidLevel | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsBrakesWorn | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsFluidLevelLow | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.PadWear | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Speed | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.AirTemperature | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.IsPressureLow | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.Pressure | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.RubberTemperature | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.SteeringAngle | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.AngularSpeed | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.FluidLevel | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsBrakesWorn | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsFluidLevelLow | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.PadWear | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Speed | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.AirTemperature | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.IsPressureLow | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.Pressure | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.RubberTemperature | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.AngularSpeed | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.FluidLevel | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsBrakesWorn | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsFluidLevelLow | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.PadWear | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Speed | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.AirTemperature | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.IsPressureLow | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.Pressure | 100 | 10 | uint16 | 32767 | 65535 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.RubberTemperature | 100 | 10 | float | 0.0 | 3.4028235e+38 |
+        | Vehicle.Chassis.Brake.IsDriverEmergencyBrakingDetected | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.Brake.PedalPosition | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.ParkingBrake.IsEngaged | 100 | 10 | bool | false | true |
+        | Vehicle.Chassis.SteeringWheel.Angle | 100 | 10 | int16 | 0 | 32767 |
+        | Vehicle.Chassis.SteeringWheel.Extension | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.SteeringWheel.Heating | 100 | 10 | uint8 | 50 | 100 |
+        | Vehicle.Chassis.SteeringWheel.Tilt | 100 | 10 | uint8 | 50 | 100 |
+        
+
+
+    @CleanupRestoreNetwork
+    Scenario Outline: Unsubscribe requests during network failure result in client error
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are failed
+
+    Examples:
+        | path                                          | network_failure | datatype  | value     |
+        | Vehicle.Chassis.Accelerator.PedalPosition | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Accelerator.PedalPosition | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.SteeringAngle | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.SteeringAngle | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.AngularSpeed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.AngularSpeed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.FluidLevel | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.FluidLevel | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsBrakesWorn | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsBrakesWorn | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsFluidLevelLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsFluidLevelLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.PadWear | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.PadWear | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Speed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Speed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.AirTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.AirTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.IsPressureLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.IsPressureLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Pressure | reject  | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Pressure | timeout | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.RubberTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.RubberTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.AngularSpeed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.AngularSpeed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.FluidLevel | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.FluidLevel | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsBrakesWorn | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsBrakesWorn | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsFluidLevelLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsFluidLevelLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.PadWear | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.PadWear | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Speed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Speed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.AirTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.AirTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.IsPressureLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.IsPressureLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.Pressure | reject  | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.Pressure | timeout | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.RubberTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.RubberTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.SteeringAngle | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.SteeringAngle | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.AngularSpeed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.AngularSpeed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.FluidLevel | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.FluidLevel | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsBrakesWorn | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsBrakesWorn | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsFluidLevelLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsFluidLevelLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.PadWear | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.PadWear | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Speed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Speed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.AirTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.AirTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.IsPressureLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.IsPressureLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.Pressure | reject  | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.Pressure | timeout | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.RubberTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.RubberTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.AngularSpeed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.AngularSpeed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.FluidLevel | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.FluidLevel | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsBrakesWorn | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsBrakesWorn | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsFluidLevelLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsFluidLevelLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.PadWear | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.PadWear | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Speed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Speed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.AirTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.AirTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.IsPressureLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.IsPressureLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.Pressure | reject  | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.Pressure | timeout | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.RubberTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.RubberTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Brake.IsDriverEmergencyBrakingDetected | reject  | bool | false |
+        | Vehicle.Chassis.Brake.IsDriverEmergencyBrakingDetected | timeout | bool | false |
+        | Vehicle.Chassis.Brake.PedalPosition | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Brake.PedalPosition | timeout | uint8 | 50 |
+        | Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled | reject  | bool | false |
+        | Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled | timeout | bool | false |
+        | Vehicle.Chassis.ParkingBrake.IsEngaged | reject  | bool | false |
+        | Vehicle.Chassis.ParkingBrake.IsEngaged | timeout | bool | false |
+        | Vehicle.Chassis.SteeringWheel.Angle | reject  | int16 | 0 |
+        | Vehicle.Chassis.SteeringWheel.Angle | timeout | int16 | 0 |
+        | Vehicle.Chassis.SteeringWheel.Extension | reject  | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Extension | timeout | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Heating | reject  | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Heating | timeout | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Tilt | reject  | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Tilt | timeout | uint8 | 50 |
+        
+
+
+    Scenario Outline: Unsubscribe requests after recovery from network failure are succeeded
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        And network is restored from the failure
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are succeeded
+
+    Examples:
+        | path                                          | network_failure | datatype  | value     |
+        | Vehicle.Chassis.Accelerator.PedalPosition | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Accelerator.PedalPosition | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.SteeringAngle | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.SteeringAngle | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.AngularSpeed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.AngularSpeed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.FluidLevel | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.FluidLevel | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsBrakesWorn | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsBrakesWorn | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsFluidLevelLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsFluidLevelLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.PadWear | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.PadWear | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Speed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Speed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.AirTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.AirTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.IsPressureLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.IsPressureLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Pressure | reject  | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Pressure | timeout | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.RubberTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.RubberTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.AngularSpeed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.AngularSpeed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.FluidLevel | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.FluidLevel | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsBrakesWorn | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsBrakesWorn | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsFluidLevelLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsFluidLevelLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.PadWear | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.PadWear | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Speed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Speed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.AirTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.AirTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.IsPressureLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.IsPressureLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.Pressure | reject  | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.Pressure | timeout | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.RubberTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.RubberTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.SteeringAngle | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.SteeringAngle | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.AngularSpeed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.AngularSpeed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.FluidLevel | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.FluidLevel | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsBrakesWorn | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsBrakesWorn | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsFluidLevelLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsFluidLevelLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.PadWear | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.PadWear | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Speed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Speed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.AirTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.AirTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.IsPressureLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.IsPressureLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.Pressure | reject  | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.Pressure | timeout | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.RubberTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.RubberTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.AngularSpeed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.AngularSpeed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.FluidLevel | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.FluidLevel | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsBrakesWorn | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsBrakesWorn | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsFluidLevelLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsFluidLevelLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.PadWear | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.PadWear | timeout | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Speed | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Speed | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.AirTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.AirTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.IsPressureLow | reject  | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.IsPressureLow | timeout | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.Pressure | reject  | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.Pressure | timeout | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.RubberTemperature | reject  | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.RubberTemperature | timeout | float | 0.0 |
+        | Vehicle.Chassis.Brake.IsDriverEmergencyBrakingDetected | reject  | bool | false |
+        | Vehicle.Chassis.Brake.IsDriverEmergencyBrakingDetected | timeout | bool | false |
+        | Vehicle.Chassis.Brake.PedalPosition | reject  | uint8 | 50 |
+        | Vehicle.Chassis.Brake.PedalPosition | timeout | uint8 | 50 |
+        | Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled | reject  | bool | false |
+        | Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled | timeout | bool | false |
+        | Vehicle.Chassis.ParkingBrake.IsEngaged | reject  | bool | false |
+        | Vehicle.Chassis.ParkingBrake.IsEngaged | timeout | bool | false |
+        | Vehicle.Chassis.SteeringWheel.Angle | reject  | int16 | 0 |
+        | Vehicle.Chassis.SteeringWheel.Angle | timeout | int16 | 0 |
+        | Vehicle.Chassis.SteeringWheel.Extension | reject  | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Extension | timeout | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Heating | reject  | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Heating | timeout | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Tilt | reject  | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Tilt | timeout | uint8 | 50 |
+        
+
+
+    @CleanupRestoreServer
+    Scenario Outline: Unsubscribe requests during server down result in client error
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When the server is stopped
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are failed
+
+    Examples:
+        | path                                          | datatype  | value   |
+        | Vehicle.Chassis.Accelerator.PedalPosition | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.SteeringAngle | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.SteeringAngle | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Brake.IsDriverEmergencyBrakingDetected | bool | false |
+        | Vehicle.Chassis.Brake.PedalPosition | uint8 | 50 |
+        | Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled | bool | false |
+        | Vehicle.Chassis.ParkingBrake.IsEngaged | bool | false |
+        | Vehicle.Chassis.SteeringWheel.Angle | int16 | 0 |
+        | Vehicle.Chassis.SteeringWheel.Extension | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Heating | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Tilt | uint8 | 50 |
+        
+
+
+    @CleanupRestoreServer
+    Scenario Outline: Unsubscribe requests after server reset are succeeded
+        Given HeadlessApp subscribe the sensor signal <path> which is initialized <value> of datatype <datatype>
+        When the server is reset
+        Then attempts to unsubscribe the subscription to <path> of <datatype> are succeeded
+
+    Examples:
+        | path                                          | datatype  | value   |
+        | Vehicle.Chassis.Accelerator.PedalPosition | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.SteeringAngle | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Left.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row1.Wheel.Right.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.SteeringAngle | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Left.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.AngularSpeed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.FluidLevel | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsBrakesWorn | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.IsFluidLevelLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Brake.PadWear | uint8 | 50 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Speed | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.AirTemperature | float | 0.0 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.IsPressureLow | bool | false |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.Pressure | uint16 | 32767 |
+        | Vehicle.Chassis.Axle.Row2.Wheel.Right.Tire.RubberTemperature | float | 0.0 |
+        | Vehicle.Chassis.Brake.IsDriverEmergencyBrakingDetected | bool | false |
+        | Vehicle.Chassis.Brake.PedalPosition | uint8 | 50 |
+        | Vehicle.Chassis.ParkingBrake.IsAutoApplyEnabled | bool | false |
+        | Vehicle.Chassis.ParkingBrake.IsEngaged | bool | false |
+        | Vehicle.Chassis.SteeringWheel.Angle | int16 | 0 |
+        | Vehicle.Chassis.SteeringWheel.Extension | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Heating | uint8 | 50 |
+        | Vehicle.Chassis.SteeringWheel.Tilt | uint8 | 50 |
+        
+

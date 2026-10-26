@@ -1,0 +1,426 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2026 JASPAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# language: en
+
+Feature: Subscribe
+
+    Scenario Outline: HeadlessApp_Subscribe_Sensor_Value
+        Given PAL set sensor signal <path> to <datatype> <value>
+        Given HeadlessApp subscribe the sensor signal <path> of <datatype>
+        Then PAL set the signal at <path> of <datatype> to <values> by order, subscribe stream receive the same data
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                         | datatype  | value            | values            |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | ["{\"X\":{\"type\":\"int16\",\"value\":32767},\"Y\":{\"type\":\"int16\",\"value\":32767},\"Z\":{\"type\":\"int16\",\"value\":32767},\"Yaw\":{\"type\":\"float\",\"value\":180},\"Pitch\":{\"type\":\"float\",\"value\":90},\"Roll\":{\"type\":\"float\",\"value\":180}}","{\"X\":{\"type\":\"int16\",\"value\":0},\"Y\":{\"type\":\"int16\",\"value\":0},\"Z\":{\"type\":\"int16\",\"value\":0},\"Yaw\":{\"type\":\"float\",\"value\":0},\"Pitch\":{\"type\":\"float\",\"value\":0},\"Roll\":{\"type\":\"float\",\"value\":0}}","{\"X\":{\"type\":\"int16\",\"value\":-32768},\"Y\":{\"type\":\"int16\",\"value\":-32768},\"Z\":{\"type\":\"int16\",\"value\":-32768},\"Yaw\":{\"type\":\"float\",\"value\":-180},\"Pitch\":{\"type\":\"float\",\"value\":-90},\"Roll\":{\"type\":\"float\",\"value\":-180}}"] |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | ["{\"Azimuth\":{\"type\":\"float\",\"value\":180},\"Elevation\":{\"type\":\"float\",\"value\":90}}","{\"Azimuth\":{\"type\":\"float\",\"value\":0},\"Elevation\":{\"type\":\"float\",\"value\":0}}","{\"Azimuth\":{\"type\":\"float\",\"value\":-180},\"Elevation\":{\"type\":\"float\",\"value\":-90}}"] |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | ["{\"X\":{\"type\":\"int16\",\"value\":32767},\"Y\":{\"type\":\"int16\",\"value\":32767},\"Z\":{\"type\":\"int16\",\"value\":32767},\"Yaw\":{\"type\":\"float\",\"value\":180},\"Pitch\":{\"type\":\"float\",\"value\":90},\"Roll\":{\"type\":\"float\",\"value\":180}}","{\"X\":{\"type\":\"int16\",\"value\":0},\"Y\":{\"type\":\"int16\",\"value\":0},\"Z\":{\"type\":\"int16\",\"value\":0},\"Yaw\":{\"type\":\"float\",\"value\":0},\"Pitch\":{\"type\":\"float\",\"value\":0},\"Roll\":{\"type\":\"float\",\"value\":0}}","{\"X\":{\"type\":\"int16\",\"value\":-32768},\"Y\":{\"type\":\"int16\",\"value\":-32768},\"Z\":{\"type\":\"int16\",\"value\":-32768},\"Yaw\":{\"type\":\"float\",\"value\":-180},\"Pitch\":{\"type\":\"float\",\"value\":-90},\"Roll\":{\"type\":\"float\",\"value\":-180}}"] |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | ["{\"Azimuth\":{\"type\":\"float\",\"value\":180},\"Elevation\":{\"type\":\"float\",\"value\":90}}","{\"Azimuth\":{\"type\":\"float\",\"value\":0},\"Elevation\":{\"type\":\"float\",\"value\":0}}","{\"Azimuth\":{\"type\":\"float\",\"value\":-180},\"Elevation\":{\"type\":\"float\",\"value\":-90}}"] |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | ["{\"X\":{\"type\":\"int16\",\"value\":32767},\"Y\":{\"type\":\"int16\",\"value\":32767},\"Z\":{\"type\":\"int16\",\"value\":32767},\"Yaw\":{\"type\":\"float\",\"value\":180},\"Pitch\":{\"type\":\"float\",\"value\":90},\"Roll\":{\"type\":\"float\",\"value\":180}}","{\"X\":{\"type\":\"int16\",\"value\":0},\"Y\":{\"type\":\"int16\",\"value\":0},\"Z\":{\"type\":\"int16\",\"value\":0},\"Yaw\":{\"type\":\"float\",\"value\":0},\"Pitch\":{\"type\":\"float\",\"value\":0},\"Roll\":{\"type\":\"float\",\"value\":0}}","{\"X\":{\"type\":\"int16\",\"value\":-32768},\"Y\":{\"type\":\"int16\",\"value\":-32768},\"Z\":{\"type\":\"int16\",\"value\":-32768},\"Yaw\":{\"type\":\"float\",\"value\":-180},\"Pitch\":{\"type\":\"float\",\"value\":-90},\"Roll\":{\"type\":\"float\",\"value\":-180}}"] |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | ["{\"Azimuth\":{\"type\":\"float\",\"value\":180},\"Elevation\":{\"type\":\"float\",\"value\":90}}","{\"Azimuth\":{\"type\":\"float\",\"value\":0},\"Elevation\":{\"type\":\"float\",\"value\":0}}","{\"Azimuth\":{\"type\":\"float\",\"value\":-180},\"Elevation\":{\"type\":\"float\",\"value\":-90}}"] |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | ["{\"X\":{\"type\":\"int16\",\"value\":32767},\"Y\":{\"type\":\"int16\",\"value\":32767},\"Z\":{\"type\":\"int16\",\"value\":32767},\"Yaw\":{\"type\":\"float\",\"value\":180},\"Pitch\":{\"type\":\"float\",\"value\":90},\"Roll\":{\"type\":\"float\",\"value\":180}}","{\"X\":{\"type\":\"int16\",\"value\":0},\"Y\":{\"type\":\"int16\",\"value\":0},\"Z\":{\"type\":\"int16\",\"value\":0},\"Yaw\":{\"type\":\"float\",\"value\":0},\"Pitch\":{\"type\":\"float\",\"value\":0},\"Roll\":{\"type\":\"float\",\"value\":0}}","{\"X\":{\"type\":\"int16\",\"value\":-32768},\"Y\":{\"type\":\"int16\",\"value\":-32768},\"Z\":{\"type\":\"int16\",\"value\":-32768},\"Yaw\":{\"type\":\"float\",\"value\":-180},\"Pitch\":{\"type\":\"float\",\"value\":-90},\"Roll\":{\"type\":\"float\",\"value\":-180}}"] |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | ["{\"Azimuth\":{\"type\":\"float\",\"value\":180},\"Elevation\":{\"type\":\"float\",\"value\":90}}","{\"Azimuth\":{\"type\":\"float\",\"value\":0},\"Elevation\":{\"type\":\"float\",\"value\":0}}","{\"Azimuth\":{\"type\":\"float\",\"value\":-180},\"Elevation\":{\"type\":\"float\",\"value\":-90}}"] |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | ["{\"X\":{\"type\":\"int16\",\"value\":32767},\"Y\":{\"type\":\"int16\",\"value\":32767},\"Z\":{\"type\":\"int16\",\"value\":32767},\"Yaw\":{\"type\":\"float\",\"value\":180},\"Pitch\":{\"type\":\"float\",\"value\":90},\"Roll\":{\"type\":\"float\",\"value\":180}}","{\"X\":{\"type\":\"int16\",\"value\":0},\"Y\":{\"type\":\"int16\",\"value\":0},\"Z\":{\"type\":\"int16\",\"value\":0},\"Yaw\":{\"type\":\"float\",\"value\":0},\"Pitch\":{\"type\":\"float\",\"value\":0},\"Roll\":{\"type\":\"float\",\"value\":0}}","{\"X\":{\"type\":\"int16\",\"value\":-32768},\"Y\":{\"type\":\"int16\",\"value\":-32768},\"Z\":{\"type\":\"int16\",\"value\":-32768},\"Yaw\":{\"type\":\"float\",\"value\":-180},\"Pitch\":{\"type\":\"float\",\"value\":-90},\"Roll\":{\"type\":\"float\",\"value\":-180}}"] |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | ["{\"Azimuth\":{\"type\":\"float\",\"value\":180},\"Elevation\":{\"type\":\"float\",\"value\":90}}","{\"Azimuth\":{\"type\":\"float\",\"value\":0},\"Elevation\":{\"type\":\"float\",\"value\":0}}","{\"Azimuth\":{\"type\":\"float\",\"value\":-180},\"Elevation\":{\"type\":\"float\",\"value\":-90}}"] |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | ["{\"X\":{\"type\":\"int16\",\"value\":32767},\"Y\":{\"type\":\"int16\",\"value\":32767},\"Z\":{\"type\":\"int16\",\"value\":32767},\"Yaw\":{\"type\":\"float\",\"value\":180},\"Pitch\":{\"type\":\"float\",\"value\":90},\"Roll\":{\"type\":\"float\",\"value\":180}}","{\"X\":{\"type\":\"int16\",\"value\":0},\"Y\":{\"type\":\"int16\",\"value\":0},\"Z\":{\"type\":\"int16\",\"value\":0},\"Yaw\":{\"type\":\"float\",\"value\":0},\"Pitch\":{\"type\":\"float\",\"value\":0},\"Roll\":{\"type\":\"float\",\"value\":0}}","{\"X\":{\"type\":\"int16\",\"value\":-32768},\"Y\":{\"type\":\"int16\",\"value\":-32768},\"Z\":{\"type\":\"int16\",\"value\":-32768},\"Yaw\":{\"type\":\"float\",\"value\":-180},\"Pitch\":{\"type\":\"float\",\"value\":-90},\"Roll\":{\"type\":\"float\",\"value\":-180}}"] |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | ["THIS_IS_A_TEST_STRING","THIS_IS_B_TEST_STRING"] |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | ["{\"Azimuth\":{\"type\":\"float\",\"value\":180},\"Elevation\":{\"type\":\"float\",\"value\":90}}","{\"Azimuth\":{\"type\":\"float\",\"value\":0},\"Elevation\":{\"type\":\"float\",\"value\":0}}","{\"Azimuth\":{\"type\":\"float\",\"value\":-180},\"Elevation\":{\"type\":\"float\",\"value\":-90}}"] |
+        
+    Scenario Outline: Notification of subscribed signals
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        
+    Scenario Outline: Notification is delivered even if the signal is unavailable as sensor
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> as unavailable
+        Then the subscribe stream returns <datatype> <value_1> on <path> as unavailable as sensor
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        
+    Scenario Outline: Notification carries IsAvailableActuator as true when reported by the producer
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> as available actuator
+        Then the subscription stream returns available actuator on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        
+    Scenario Outline: Notification carries a produced timestamp when the producer attaches one
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype> with a produced timestamp
+        Then the subscribe stream returns a produced timestamp on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        
+    Scenario Outline: Multiple subscriptions to a signal
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count         | duplex        | datatype      | value_0       | value_1       |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | 2 | 1 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | 2 | 1 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | 2 | 1 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | 2 | 1 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | 2 | 1 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | 2 | 1 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | 2 | 1 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | 2 | 1 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | 2 | 1 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | 2 | 1 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | 2 | 1 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | 2 | 1 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | 2 | 1 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        
+    Scenario Outline: Notification issued even if signal value being changed
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>, which is equal to the current value
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        
+    Scenario Outline: Millions of subscribe requests do not kill kura server & subscription_ids are correctly returned
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> for <count> times with duplex <duplex> are all succeeded
+        When the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream returns <datatype> <value_1> on <path>
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count            | duplex           | datatype      | value_0       | value_1       |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | 100 | 10 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | 100 | 10 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | 100 | 10 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | 100 | 10 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | 100 | 10 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | 100 | 10 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | 100 | 10 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | 100 | 10 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | 100 | 10 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | 100 | 10 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | 100 | 10 | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | 100 | 10 | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | 100 | 10 | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        
+    @CleanupRestoreServer
+    Scenario Outline: Subscribe requests are failed when the server is stopped
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When the server is stopped
+        Then an attempt to subscribe the signal at <path> of datatype <datatype> is failed
+
+    Examples:
+        | path                                                     | datatype      | value_0       |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} |
+        
+    @CleanupRestoreNetwork
+    Scenario Outline: Subscribe requests are failed when the network communication failure
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        When network failure of <network_failure> is injected
+        Then an attempt to subscribe the signal at <path> of datatype <datatype> is failed
+
+    Examples:
+        | path                                                     | datatype      | value_0       | network_failure       |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | reject  |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | timeout |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | reject  |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | timeout |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | reject  |
+        
+    Scenario Outline: Subscribe contexts are no longer available after the server is reset
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the server is reset
+        And the value of signal at <path> changes to <value_1> of datatype <datatype>
+        Then the subscribe stream for the signal <path> returns no data
+        And HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | datatype      | value_0       | value_1       |
+        | Vehicle.Occupant.Row1.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row1.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row1.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.DriverSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.DriverSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.Middle.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.Middle.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        | Vehicle.Occupant.Row2.PassengerSide.HeadPosition | complex | {"X":{"type":"int16","value":0},"Y":{"type":"int16","value":0},"Z":{"type":"int16","value":0},"Yaw":{"type":"float","value":0},"Pitch":{"type":"float","value":0},"Roll":{"type":"float","value":0}} | {"X":{"type":"int16","value":32767},"Y":{"type":"int16","value":32767},"Z":{"type":"int16","value":32767},"Yaw":{"type":"float","value":180},"Pitch":{"type":"float","value":90},"Roll":{"type":"float","value":180}} |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Issuer | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.Identifier.Subject | string | THIS_IS_B_TEST_STRING | THIS_IS_A_TEST_STRING |
+        | Vehicle.Occupant.Row2.PassengerSide.MidEyeGaze | complex | {"Azimuth":{"type":"float","value":0},"Elevation":{"type":"float","value":0}} | {"Azimuth":{"type":"float","value":180},"Elevation":{"type":"float","value":90}} |
+        
+    Scenario Outline: All updates are notified to subscriptions without any drops even large burden on server or network
+        Given a signal at <path> is set to <value_0> of datatype <datatype>
+        And attempts to subscribe the signal at <path> of datatype <datatype> is succeeded
+        When the signal at <path> of numeric datatype <datatype> is updated <count> times, any updates are captured from subscribe stream
+        Then HeadlessApp unsubscribe the sensor signal <path> of <datatype> to close connections
+
+    Examples:
+        | path                                                     | count            | datatype      | value_0       |
+        
